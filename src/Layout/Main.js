@@ -8,9 +8,9 @@ import Header from '../Pages/Header/Header';
 const Main = () => {
     return (
         <div>
-      <Header></Header>
-      <Outlet></Outlet>
-      <Footer></Footer>
+          <Header></Header>
+          <Outlet></Outlet>
+          <Footer></Footer>
         </div>
     );
 };

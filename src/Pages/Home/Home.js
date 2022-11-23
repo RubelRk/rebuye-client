@@ -1,6 +1,9 @@
 import React, { useContext } from 'react';
 import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
 import useTitle from '../../hooks/useTitle';
+import AdvertisedItems from './AdvertisedItems/AdvertisedItems';
+import Banner from './Banner/Banner';
+import ProductCategories from './ProductCategories /ProductCategories ';
 
 
 const Home = () => {
@@ -8,15 +11,15 @@ const Home = () => {
     useTitle('Home');
 
     if(loading){
-        return <div className='text-center'>
-            <div className="spinner-border m-5" role="status">
-           <span className="visually-hidden">Loading...</span>
-          </div>
+        return <div className='text-center m-56'>
+          <button className="btn btn-square loading"></button>
         </div>
     }
     return (
         <div>
-           <h3>this is home</h3>
+            <Banner></Banner>
+            <ProductCategories></ProductCategories>
+           <AdvertisedItems></AdvertisedItems>
         </div>
     );
 };

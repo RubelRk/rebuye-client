@@ -1,53 +1,29 @@
 import React from 'react';
-import Carousel from 'react-bootstrap/Carousel';
-import './Banner.css';
+import img from '../../../assets/image/img2.jpg'
 
 const Banner = () => {
-    return (
-        <Carousel>
-        <Carousel.Item interval={2000}>
-             <div className='img-gradient'>
-                 <img
-            className="pic d-block w-100"
-            src="https://img.freepik.com/free-photo/man-fixing-motorcycle-modern-workshop_158595-8081.jpg?size=626&ext=jpg&ga=GA1.2.1322626284.1665424355&semt=sph"
-            alt="First slide"
-                    />
-            </div>
-          <Carousel.Caption>
-            <h2>GHOST BIKERS</h2>
-            <p>MOTO REPAIR & CUSTOM SERVICES </p>
-          </Carousel.Caption>
-        </Carousel.Item>
-        <Carousel.Item interval={2000}>
-            <div className='img-gradient'>
-             <img
-            className="pic d-block w-100"
-            src="https://img.freepik.com/free-photo/man-fixing-motorcycle-modern-workshop_158595-8087.jpg?size=626&ext=jpg&ga=GA1.2.1322626284.1665424355&semt=sph"
-            alt="Second slide"
-             />
-            </div>
-          <Carousel.Caption>
-            <h2>OVER 15 YEARS OF EXPERIENCE IN THE CUSTOM BUILDS SCENE</h2>
-            <p>There are a lot of soft and hard skills you need to build a custom bike. The good news is you can learn these skills, and have a load of fun.</p>
-          </Carousel.Caption>
-        </Carousel.Item>
-        <Carousel.Item>
-            <div className='img-gradient'>
-            <img
-            className="pic d-block w-100"
-            src="https://img.freepik.com/free-photo/man-fixing-motorcycle-modern-workshop_158595-8107.jpg?size=626&ext=jpg&ga=GA1.2.1322626284.1665424355&semt=sph"
-            alt="Third slide"
-          />
-            </div>
-          <Carousel.Caption>
-            <h2>CUSTOM BUILDS</h2>
-            <p>
-            A custom motorcycle is a motorcycle with stylistic and/or structural changes to the 'standard' mass-produced machine offered by major manufacturers.
-            </p>
-          </Carousel.Caption>
-        </Carousel.Item>
-      </Carousel>
-    );
+  return (
+    <div className="hero min-h-screen bg-base-200">
+    <div className="hero-content flex-col lg:flex-row-reverse">
+      <img alt='' src={img} className="min-w-sm rounded-lg lg:w-2/4 shadow-2xl" />
+      <div>
+        <h1 className="text-5xl font-bold">Refurbished Phone!</h1>
+        <h1 className="text-xl font-semibold">Certified Refurbished</h1>
+        <p className="py-6">Discover what goes into each refurbished Phone.</p>
+
+        <label htmlFor="my-modal-3" className="normal-case btn btn-outline btn-info">Learn more</label>
+
+        <input type="checkbox" id="my-modal-3" className="modal-toggle" />
+<div className="modal">
+  <div className="modal-box relative">
+    <label htmlFor="my-modal-3" className="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
+    <p className="py-4">The main difference between "refurbished" and "used" products is that refurbished products have been tested and verified to function properly, and are thus free of defects, while "used" products may or may not be defective.</p>
+  </div>
+</div>
+      </div>
+    </div>
+  </div>
+  );
 };
 
-export default Banner;
+export default Banner;<h2>Banner</h2>

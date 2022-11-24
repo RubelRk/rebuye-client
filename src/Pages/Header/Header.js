@@ -1,7 +1,6 @@
 import React, { useContext } from 'react';
 import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
 import { Link } from 'react-router-dom';
-import './Header.css';
 
 
 
@@ -29,7 +28,7 @@ const Header = () => {
       <li className='m-2'><Link to='/blog'>Blog</Link></li>
       <li className='m-2'><Link to=''>Rebuy</Link></li>
       <li className='m-2'><Link to=''>phone</Link></li>
-      <li className='m-2'><Link to=''>get</Link></li>
+      <li className='m-2'><Link to='/allProduct'>All Product</Link></li>
     
       </ul>
     </div>
@@ -41,7 +40,7 @@ const Header = () => {
     <li className='m-2'><Link to='/blog'>Blog</Link></li>
       <li className='m-2'><Link to=''>Rebuy</Link></li>
       <li className='m-2'><Link to=''>phone</Link></li>
-      <li className='m-2'><Link to=''>get</Link></li>
+      <li className='m-2'><Link to='/allProduct'>All Product</Link></li>
     
     </ul>
   </div>

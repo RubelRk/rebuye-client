@@ -1,22 +1,38 @@
 import React from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faRotate, faMobile, faTruck } from '@fortawesome/free-solid-svg-icons'
 
-import { Link } from 'react-router-dom';
+
 
 const About = () => {
     return (
-        <div className='d-lg-flex mb-5'>
-           <div className='w-50 mt-sm-5 mb-5 pb-5 position-relative'>
-            <img className='ms-3'  width="500px" alt=""/>
-            <img className='d-flex justify-content-end position-absolute start-50 top-50 pe-2 border-start border-top border-5 border-white'  width="250px" height="220px" alt=""/>
-           </div>
-           <div className='ms-5 ms-lg-0 w-50 my-sm-5'>
-            <h3  className='fs-3 fw-semibold my-3 text-warning'>About Us</h3>
-            <h1 className='fs-1 fw-bold mb-3'>WE OVER 20 YEARS EXPERIENCE</h1>
-            <p className='mb-5'>Experience refers to conscious events in general, more specifically to perceptions, or to the practical knowledge and familiarity that is produced by these conscious processes. Understood as a conscious event in the widest sense, experience involves a subject to which various items are presented.</p>
-           <Link to='/about'> <button className="btn btn-outline-warning px-5 py-3">About Us</button></Link>
+       <div className='pl-12 mt-10 md:grid lg:grid-cols-3 md:grid-cols-2 gap-2 bg-base-300 py-10'>
 
-           </div>
+        <div className='mt-8 mx-5 w-48 text-center'>
+        <FontAwesomeIcon className='w-10 h-10' icon={faRotate} />
+        <h3 className='text-xl font-semibold'>Why Refurbished</h3>
+        <h3 className='text-gray-400'>Every product undergoes a rigorous certification.</h3>
+        <button className="mt-5 btn btn-outline btn-info">Learn more</button>
         </div>
+
+
+        <div  className='mt-8 w-56 text-center'>
+        <FontAwesomeIcon className='w-10 h-10' icon={faTruck} />
+        <h3 className='text-xl font-semibold'>Free next-day delivery</h3>
+        <h3 className='text-gray-400'>On select in-stock Apple products ordered by 5:00 p.m.</h3>
+        <button className="mt-5 btn btn-outline btn-info">Learn more</button>
+        </div>
+
+
+        <div  className='mt-8 w-56 text-center'>
+        <FontAwesomeIcon className='w-10 h-10' icon={faMobile} />
+        <h3 className='text-xl font-semibold'>PhoneCare</h3>
+        <h3 className='text-gray-400'>Service and support for your refurbished Apple products.</h3>
+        <button className="mt-5 btn btn-outline btn-info">Learn more</button>
+        </div>
+
+
+       </div>
     );
 };
 

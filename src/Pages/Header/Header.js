@@ -26,10 +26,10 @@ const Header = () => {
       </label>
       <ul tabIndex={0} className="text-base-100 menu menu-compact dropdown-content mt-3 p-2 shadow bg-neutral rounded-box w-52">
       <li className='m-2'><Link to='/'>Home</Link></li>
-      <li className='m-2'><Link to='/about'>About</Link></li>
       <li className='m-2'><Link to='/blog'>Blog</Link></li>
-      <li className='m-2'><Link to=''>Item 1</Link></li>
-      <li className='m-2'><Link to=''>Item 1</Link></li>
+      <li className='m-2'><Link to=''>Rebuy</Link></li>
+      <li className='m-2'><Link to=''>phone</Link></li>
+      <li className='m-2'><Link to=''>get</Link></li>
     
       </ul>
     </div>
@@ -37,11 +37,11 @@ const Header = () => {
   </div>
   <div className="navbar-center hidden lg:flex">
     <ul className="text-base-100 menu menu-horizontal p-0">
-      <li className='m-2'><Link to='/'>Home</Link></li>
-      <li className='m-2'><Link to='/about'>About</Link></li>
-      <li className='m-2'><Link to='/blog'>Blogs</Link></li>
-      <li className='m-2'><Link to=''>Item 1</Link></li>
-      <li className='m-2'><Link to='/login'>Login</Link></li>
+    <li className='m-2'><Link to='/'>Home</Link></li>
+    <li className='m-2'><Link to='/blog'>Blog</Link></li>
+      <li className='m-2'><Link to=''>Rebuy</Link></li>
+      <li className='m-2'><Link to=''>phone</Link></li>
+      <li className='m-2'><Link to=''>get</Link></li>
     
     </ul>
   </div>

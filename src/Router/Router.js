@@ -9,6 +9,7 @@ import Home from "../Pages/Home/Home";
 import ProductCategoriesDetails from "../Pages/Home/ProductCategories /ProductCategoriesDetails";
 import Login from "../Pages/Login/Login";
 import Register from "../Pages/Register/Register";
+import PrivateRoute from "./PrivateRoute";
 
 
 
@@ -44,7 +45,7 @@ export const router = createBrowserRouter([
                 loader:()=>fetch('http://localhost:4000/AllProduct')
             },{
                 path:'/ProductCategoriesDetails/:Product_Id',
-                element:<ProductCategoriesDetails></ProductCategoriesDetails>,
+                element:<PrivateRoute><ProductCategoriesDetails></ProductCategoriesDetails></PrivateRoute>,
                 loader:({params})=>fetch(`http://localhost:4000/ProductCategoriesDetails/${params.Product_Id}`)
             }
            

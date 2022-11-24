@@ -1,7 +1,7 @@
 import React from 'react';
 
 const AllProductDetails = ({product}) => {
-    const {Product_Name, location, original_price, picture, posted_time, resale_price, seller_name, years_of_use}=product;
+    const {Product_Name, location, original_price, picture, posted_time, resale_price, seller_name, years_of_use, roll}=product;
     return (
              <div className='lg:w-1/2 mx-auto'>
 
@@ -12,7 +12,14 @@ const AllProductDetails = ({product}) => {
                 <h2 className="card-title">Brand: {Product_Name}</h2>
 
                 <div className='md:flex justify-around'>
-                    <p>Seller: {seller_name}</p>
+                {roll === 'Seller' ? 
+                        
+                        <p>Seller: {seller_name} <small className='text-info'>Verified Seller</small>
+                       <input type="checkbox" checked disabled className="checkbox checkbox-sm" /> 
+                        </p>
+                         : 
+                         <p>Seller: {seller_name}</p> 
+                        }
                     <p>Location: {location}</p>
                 
                 </div>
@@ -28,7 +35,7 @@ const AllProductDetails = ({product}) => {
                 
 
                     <div className="card-actions justify-end">
-                        <button className="btn btn-primary">Watch</button>
+                        <button className="normal-case btn btn-primary">Book Now</button>
                     </div>
             </div>
       </div>

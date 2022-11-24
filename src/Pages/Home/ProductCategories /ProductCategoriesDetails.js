@@ -17,7 +17,14 @@ const ProductCategoriesDetails = () => {
                         <h2 className="card-title">Brand: {productDetail.Product_Name}</h2>
         
                         <div className='md:flex justify-around'>
-                            <p>Seller: {productDetail.seller_name}</p>
+                        { productDetail.roll === 'Seller' ? 
+                        
+                        <p>Seller: {productDetail.seller_name} <small className='text-info'>Verified Seller</small>
+                       <input type="checkbox" checked disabled className="checkbox checkbox-sm" /> 
+                        </p>
+                         : 
+                         <p>Seller: {productDetail.seller_name}</p> 
+                        }
                             <p>Location: {productDetail.location}</p>
                         
                         </div>
@@ -33,13 +40,13 @@ const ProductCategoriesDetails = () => {
                         
         
                             <div className="card-actions justify-end">
-                                <button className="btn btn-primary">Watch</button>
+                                <button className="normal-case btn btn-primary">Book Now</button>
                             </div>
                     </div>
               </div>
         
-               </div>
-               </section>
+            </div>
+        </section>
                 )
             }
         </div>

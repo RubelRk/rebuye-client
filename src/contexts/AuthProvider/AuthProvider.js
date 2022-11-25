@@ -17,6 +17,7 @@ const auth = getAuth(app);
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState({});
+  console.log(user);
   const [loading, setLoading] = useState(true);
 
   const googleProvider = new GoogleAuthProvider();
@@ -49,7 +50,7 @@ const AuthProvider = ({ children }) => {
   }, []);
 
   const logOut = () => {
-    // localStorage.removeItem(' ');
+    localStorage.removeItem("productToken");
     setLoading(true);
     return signOut(auth);
   };
@@ -59,6 +60,7 @@ const AuthProvider = ({ children }) => {
   };
 
   const authInfo = {
+    setLoading,
     user,
     createUser,
     loading,

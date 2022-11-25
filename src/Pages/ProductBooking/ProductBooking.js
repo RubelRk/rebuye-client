@@ -38,9 +38,9 @@ const ProductBooking = ({ productBooked, setProductBooked }) => {
         console.log(data);
         if (data.acknowledged) {
           toast.success("Booking Success");
+          setProductBooked(null);
         }
       }); //then er ses
-    setProductBooked(null);
   }; //handler er ses
 
   return (

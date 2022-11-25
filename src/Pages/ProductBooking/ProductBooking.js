@@ -3,7 +3,7 @@ import { AuthContext } from "../../contexts/AuthProvider/AuthProvider";
 import toast, { Toaster } from "react-hot-toast";
 
 const ProductBooking = ({ productBooked, setProductBooked }) => {
-  const { Product_Name, resale_price, seller_name } = productBooked;
+  const { Product_Name, picture, resale_price, seller_name } = productBooked;
 
   const { user } = useContext(AuthContext);
 
@@ -16,6 +16,7 @@ const ProductBooking = ({ productBooked, setProductBooked }) => {
     const seller_name = form.seller_name.value;
     const location = form.location.value;
     const phoneNumber = form.phone.value;
+    const picture = form.picture.value;
 
     const booking = {
       Product_Name,
@@ -24,6 +25,7 @@ const ProductBooking = ({ productBooked, setProductBooked }) => {
       seller_name,
       location,
       phoneNumber,
+      picture,
     };
 
     fetch("http://localhost:4000/ProductBooking", {
@@ -100,6 +102,13 @@ const ProductBooking = ({ productBooked, setProductBooked }) => {
               name="location"
               placeholder="Your Location"
               className="input input-bordered w-full"
+            />
+            <input
+              type="picture"
+              disabled
+              name="picture"
+              value={picture}
+              className="input w-full input-bordered"
             />
             <button className="btn btn-active btn-accent">Submit</button>
           </form>

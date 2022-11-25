@@ -50,6 +50,9 @@ const Header = () => {
             <li className="m-2">
               <Link to="/allProduct">All Product</Link>
             </li>
+            <li className="m-2">
+              <Link to="/dashBoard">Dashboard</Link>
+            </li>
           </ul>
         </div>
         <Link className="lg:ml-12 text-base-100 btn btn-ghost normal-case text-xl">
@@ -73,6 +76,9 @@ const Header = () => {
           <li className="m-2">
             <Link to="/allProduct">All Product</Link>
           </li>
+          <li className="m-2">
+            <Link to="/dashBoard">Dashboard</Link>
+          </li>
         </ul>
       </div>
       <div className="lg:mr-12 text-base-100 navbar-end">
@@ -87,6 +93,26 @@ const Header = () => {
         ) : (
           <Link to="/login">Login</Link>
         )}
+        <label
+          htmlFor="dashboard-drawer"
+          tabIndex={0}
+          className="text-base-100 btn btn-ghost lg:hidden"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-5 w-5"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="M4 6h16M4 12h8m-8 6h16"
+            />
+          </svg>
+        </label>
       </div>
     </div>
   );

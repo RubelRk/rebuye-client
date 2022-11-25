@@ -1,4 +1,5 @@
 import React, { useContext, useState } from "react";
+import toast from "react-hot-toast";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthProvider/AuthProvider";
 import useTitle from "../../hooks/useTitle";
@@ -19,43 +20,6 @@ const Register = () => {
       </div>
     );
   }
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const form = event.target;
-    const name = form.name.value;
-    const roll = form.roll.value;
-    const email = form.email.value;
-    const password = form.password.value;
-    console.log(name, email, password, roll);
-    createUser(email, password)
-      .then((result) => {
-        handleUpdateUserProfile(name, roll);
-        navigate(from, { replace: true });
-        setError("");
-        const user = result.user;
-        fetch("http://localhost:3000/jwt", {
-          method: "POST",
-          headers: {
-            "content-type": "application/json",
-            authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-          body: JSON.stringify(user),
-        })
-          .then((res) => res.json())
-          .then((data) => {
-            console.log(data);
-            localStorage.setItem("token", data.token);
-            form.reset();
-            // handleUpdateUserProfile(name, roll);
-            // navigate(from, { replace: true });
-          });
-      })
-      .catch((err) => {
-        setLoading(false);
-        console.error(err.message);
-        setError(`${err.message} Email or Password has wrong Creating.`);
-      });
-  };
 
   const handleGoogleSignIn = () => {
     googleSignIn()
@@ -67,14 +31,79 @@ const Register = () => {
       .catch((err) => console.error(err));
   };
 
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const form = event.target;
+    const name = form.name.value;
+    const roll = form.roll.value;
+    const email = form.email.value;
+    const password = form.password.value;
+    createUser(email, password)
+      .then((result) => {
+        toast.success("Registration Successful");
+        handleUpdateUserProfile(name, roll);
+        saveUser(name, email);
+        setError("");
+        // const user = result.user;
+        // fetch("http://localhost:3000/jwt", {
+        //   method: "POST",
+        //   headers: {
+        //     "content-type": "application/json",
+        //     authorization: `Bearer ${localStorage.getItem("token")}`,
+        //   },
+        //   body: JSON.stringify(user),
+        // })
+        //   .then((res) => res.json())
+        //   .then((data) => {
+        //     console.log(data);
+        //     localStorage.setItem("token", data.token);
+        //     form.reset();
+        //     // handleUpdateUserProfile(name, roll);
+        //     // navigate(from, { replace: true });
+        //   });
+      })
+      .catch((err) => {
+        setLoading(false);
+        console.error(err.message);
+        setError(`${err.message} Email or Password has wrong Creating.`);
+      });
+  };
+
   const handleUpdateUserProfile = (name, roll) => {
     const profile = {
       photoURL: roll,
       displayName: name,
+      UserRoll: roll,
     };
     updateUserProfile(profile)
       .then((res) => {})
       .catch((err) => console.error(err));
+  };
+
+  const saveUser = (name, email) => {
+    const user = { name, email };
+    fetch("http://localhost:4000/users", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(user),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        getUserToken(email);
+      });
+  };
+
+  const getUserToken = (email) => {
+    fetch(`http://localhost:4000/jwt?email=${email}`)
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.token) {
+          localStorage.setItem("token", data.token);
+          navigate(from, { replace: true });
+        }
+      });
   };
 
   return (

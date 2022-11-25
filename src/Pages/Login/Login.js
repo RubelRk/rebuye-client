@@ -1,4 +1,5 @@
 import React, { useContext, useState } from "react";
+import toast from "react-hot-toast";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthProvider/AuthProvider";
 import useTitle from "../../hooks/useTitle";
@@ -28,6 +29,7 @@ const Login = () => {
     console.log(email, password);
     logInUser(email, password)
       .then((result) => {
+        toast.success("Login Successful");
         const user = result.user;
         setError("");
         navigate(from, { replace: true });
@@ -62,6 +64,7 @@ const Login = () => {
   const handleGoogleSignIn = () => {
     googleSignIn()
       .then((res) => {
+        toast.success("Login Successful");
         const user = res.user;
         console.log(user);
         navigate(from, { replace: true });

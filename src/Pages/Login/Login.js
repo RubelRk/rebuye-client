@@ -3,15 +3,22 @@ import toast from "react-hot-toast";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthProvider/AuthProvider";
 import useTitle from "../../hooks/useTitle";
+import useToken from "../../hooks/useToken";
 
 const Login = () => {
   const [error, setError] = useState("");
   useTitle("Login");
   const { loading, setLoading, logInUser, googleSignIn } =
     useContext(AuthContext);
+  const [loginEmail, setLoginEmail] = useState();
+  const [token] = useToken(loginEmail);
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
+
+  if (token) {
+    navigate(from, { replace: true });
+  }
 
   if (loading) {
     return (
@@ -26,33 +33,13 @@ const Login = () => {
     const form = event.target;
     const email = form.email.value;
     const password = form.password.value;
-    console.log(email, password);
     logInUser(email, password)
       .then((result) => {
         toast.success("Login Successful");
         const user = result.user;
+        setLoginEmail(user.email);
         setError("");
-        navigate(from, { replace: true });
         form.reset();
-        const currentUser = {
-          email: user.email,
-        };
-        console.log(currentUser);
-        // fetch("http://localhost:3000/jwt", {
-        //   method: "POST",
-        //   headers: {
-        //     "content-type": "application/json",
-        //     authorization: `Bearer ${localStorage.getItem("token")}`,
-        //   },
-        //   body: JSON.stringify(currentUser),
-        // })
-        // .then((res) => res.json())
-        // .then((data) => {
-        //   console.log(data);
-        //   localStorage.setItem("token", data.token);
-        //   navigate(from, { replace: true });
-        //   form.reset();
-        // });
       })
       .catch((err) => {
         setLoading(false);

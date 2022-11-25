@@ -3,6 +3,7 @@ import DashBoardLayout from "../Layout/DashBoardLayout";
 import Main from "../Layout/Main";
 import AllProduct from "../Pages/AllProduct/AllProduct";
 import Blog from "../Pages/Blog/Blog";
+import AllUser from "../Pages/DashBoard/AllUser/AllUser";
 import DashBoard from "../Pages/DashBoard/DashBoard";
 import ErrorPage from "../Pages/ErrorPage/ErrorPage";
 import About from "../Pages/Home/About/About";
@@ -81,6 +82,12 @@ export const router = createBrowserRouter([
             <DashBoard></DashBoard>
           </PrivateRoute>
         ),
+      },
+      {
+        path: "/dashBoard/allUser/:role",
+        element: <AllUser></AllUser>,
+        loader: ({ params }) =>
+          fetch(`http://localhost:4000/users/${params.role}`),
       },
     ],
   },

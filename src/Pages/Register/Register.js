@@ -3,15 +3,21 @@ import toast from "react-hot-toast";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthProvider/AuthProvider";
 import useTitle from "../../hooks/useTitle";
+import useToken from "../../hooks/useToken";
 
 const Register = () => {
-  const [error, setError] = useState("");
   useTitle("Register");
   const { loading, setLoading, createUser, googleSignIn, updateUserProfile } =
     useContext(AuthContext);
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
+  const [error, setError] = useState("");
+  const [emailData, setEmailData] = useState("");
+  const [token] = useToken(emailData);
+  if (token) {
+    navigate(from, { replace: true });
+  }
 
   if (loading) {
     return (
@@ -35,32 +41,15 @@ const Register = () => {
     event.preventDefault();
     const form = event.target;
     const name = form.name.value;
-    const roll = form.roll.value;
+    const role = form.role.value;
     const email = form.email.value;
     const password = form.password.value;
     createUser(email, password)
       .then((result) => {
         toast.success("Registration Successful");
-        handleUpdateUserProfile(name, roll);
-        saveUser(name, email);
+        handleUpdateUserProfile(name);
+        saveUser(name, email, role);
         setError("");
-        // const user = result.user;
-        // fetch("http://localhost:3000/jwt", {
-        //   method: "POST",
-        //   headers: {
-        //     "content-type": "application/json",
-        //     authorization: `Bearer ${localStorage.getItem("token")}`,
-        //   },
-        //   body: JSON.stringify(user),
-        // })
-        //   .then((res) => res.json())
-        //   .then((data) => {
-        //     console.log(data);
-        //     localStorage.setItem("token", data.token);
-        //     form.reset();
-        //     // handleUpdateUserProfile(name, roll);
-        //     // navigate(from, { replace: true });
-        //   });
       })
       .catch((err) => {
         setLoading(false);
@@ -69,19 +58,17 @@ const Register = () => {
       });
   };
 
-  const handleUpdateUserProfile = (name, roll) => {
+  const handleUpdateUserProfile = (name) => {
     const profile = {
-      photoURL: roll,
       displayName: name,
-      UserRoll: roll,
     };
     updateUserProfile(profile)
       .then((res) => {})
       .catch((err) => console.error(err));
   };
 
-  const saveUser = (name, email) => {
-    const user = { name, email };
+  const saveUser = (name, email, role) => {
+    const user = { name, email, role };
     fetch("http://localhost:4000/users", {
       method: "POST",
       headers: {
@@ -91,18 +78,7 @@ const Register = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        getUserToken(email);
-      });
-  };
-
-  const getUserToken = (email) => {
-    fetch(`http://localhost:4000/jwt?email=${email}`)
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.token) {
-          localStorage.setItem("token", data.token);
-          navigate(from, { replace: true });
-        }
+        setEmailData(email);
       });
   };
 
@@ -152,10 +128,10 @@ const Register = () => {
                 className="input input-bordered"
               />
               <label className="label">
-                <span className="label-text">Roll</span>
+                <span className="label-text">role</span>
               </label>
               <select
-                name="roll"
+                name="role"
                 defaultValue="Buyer"
                 className="select select-bordered w-full"
               >

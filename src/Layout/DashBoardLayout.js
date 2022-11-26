@@ -7,7 +7,6 @@ import Header from "../Pages/Header/Header";
 const DashBoardLayout = () => {
   const { user } = useContext(AuthContext);
   const [isAdmin, adminLoading] = useAdmin(user?.email);
-  console.log(isAdmin);
   if (adminLoading) {
     return (
       <div className="text-center m-56">
@@ -31,9 +30,7 @@ const DashBoardLayout = () => {
         <div className="drawer-side">
           <label htmlFor="dashboard-drawer" className="drawer-overlay"></label>
           <ul className="menu p-4 w-80 bg-base-100 text-base-content">
-            <li>
-              <Link to="/dashBoard">My Orders</Link>
-            </li>
+            {/* only Admin View */}
             {isAdmin && (
               <div>
                 <li>
@@ -44,13 +41,22 @@ const DashBoardLayout = () => {
                 </li>
               </div>
             )}
-
-            <li>
-              <Link to="/dashBoard/addProduct">Add A Product</Link>
-            </li>
-            <li>
-              <Link to="/dashBoard/myProduct">My Product</Link>
-            </li>
+            {isAdmin ? (
+              ""
+            ) : (
+              <>
+                {" "}
+                <li>
+                  <Link to="/dashBoard">My Orders</Link>
+                </li>
+                <li>
+                  <Link to="/dashBoard/addProduct">Add A Product</Link>
+                </li>
+                <li>
+                  <Link to="/dashBoard/myProduct">My Product</Link>
+                </li>
+              </>
+            )}
           </ul>
         </div>
       </div>

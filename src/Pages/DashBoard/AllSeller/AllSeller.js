@@ -2,17 +2,11 @@ import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import toast from "react-hot-toast";
 
-const AllUser = () => {
-  //load all Buyer data
-
-  const {
-    data: buyers = [],
-    refetch,
-    isLoading,
-  } = useQuery({
+const AllSeller = () => {
+  const { data: Sellers = [], refetch } = useQuery({
     queryKey: ["users/Buyer"],
     queryFn: async () => {
-      const res = await fetch(`http://localhost:4000/users/Buyer`, {
+      const res = await fetch(`http://localhost:4000/users/Seller`, {
         headers: {
           authorization: `Bearer ${localStorage.getItem("token")}`,
         },
@@ -21,8 +15,6 @@ const AllUser = () => {
       return data;
     },
   });
-
-  //Verify Buyer data
 
   const handleVerify = (id) => {
     fetch(`http://localhost:4000/users/admin/${id}`, {
@@ -39,7 +31,6 @@ const AllUser = () => {
       });
   };
 
-  //Delete Buyer Data
   const handleDeleteUser = (id) => {
     fetch(`http://localhost:4000/users/${id}`, {
       method: "DELETE",
@@ -56,17 +47,9 @@ const AllUser = () => {
         }
       });
   };
-  if (isLoading) {
-    return (
-      <div className="text-center m-56">
-        <button className="btn btn-square loading"></button>
-      </div>
-    );
-  }
-
   return (
     <div>
-      <h2>All User: {buyers.length}</h2>
+      <h2>All Seller: {Sellers.length}</h2>
       <div className="overflow-x-auto w-full">
         <table className="table w-full">
           <thead>
@@ -79,14 +62,14 @@ const AllUser = () => {
           </thead>
 
           <tbody>
-            {buyers.map((buyer) => (
-              <tr key={buyer._id}>
-                <td>{buyer?.name}</td>
-                <td>{buyer?.email}</td>
+            {Sellers.map((Seller) => (
+              <tr key={Seller._id}>
+                <td>{Seller?.name}</td>
+                <td>{Seller?.email}</td>
                 <td>
-                  {buyer?.userInfo !== "verified" ? (
+                  {Seller?.userInfo !== "verified" ? (
                     <button
-                      onClick={() => handleVerify(buyer?._id)}
+                      onClick={() => handleVerify(Seller?._id)}
                       className="btn btn-xs"
                     >
                       Verify
@@ -97,7 +80,7 @@ const AllUser = () => {
                 </td>
                 <th>
                   <button
-                    onClick={() => handleDeleteUser(buyer?._id)}
+                    onClick={() => handleDeleteUser(Seller?._id)}
                     className="btn btn-ghost btn-xs"
                   >
                     Delete
@@ -112,4 +95,4 @@ const AllUser = () => {
   );
 };
 
-export default AllUser;
+export default AllSeller;

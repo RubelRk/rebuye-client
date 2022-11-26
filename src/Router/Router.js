@@ -3,6 +3,7 @@ import DashBoardLayout from "../Layout/DashBoardLayout";
 import Main from "../Layout/Main";
 import AllProduct from "../Pages/AllProduct/AllProduct";
 import Blog from "../Pages/Blog/Blog";
+import AllSeller from "../Pages/DashBoard/AllSeller/AllSeller";
 import AllUser from "../Pages/DashBoard/AllUser/AllUser";
 import DashBoard from "../Pages/DashBoard/DashBoard";
 import AddProduct from "../Pages/DashBoard/MyProduct/AddProduct";
@@ -85,14 +86,22 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: "/dashBoard/allUser/:role",
+        path: "/dashBoard/allUser/Buyer",
         element: (
           <AdminRoute>
             <AllUser></AllUser>
           </AdminRoute>
         ),
-        loader: ({ params }) =>
-          fetch(`http://localhost:4000/users/${params.role}`),
+        loader: () => fetch(`http://localhost:4000/users/Buyer`),
+      },
+      {
+        path: "/dashBoard/allUser/Seller",
+        element: (
+          <AdminRoute>
+            <AllSeller></AllSeller>
+          </AdminRoute>
+        ),
+        loader: () => fetch(`http://localhost:4000/users/Seller`),
       },
       {
         path: "/dashBoard/addProduct",

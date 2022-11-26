@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link, Outlet } from "react-router-dom";
+import { AuthContext } from "../contexts/AuthProvider/AuthProvider";
 import Header from "../Pages/Header/Header";
 
 const DashBoardLayout = () => {
+  const { user } = useContext(AuthContext);
+  console.log(user);
   return (
     <div>
       <Header></Header>
@@ -26,6 +29,12 @@ const DashBoardLayout = () => {
             </li>
             <li>
               <Link to="/dashBoard/allUser/Seller">All Seller</Link>
+            </li>
+            <li>
+              <Link to="/dashBoard/addProduct">Add A Product</Link>
+            </li>
+            <li>
+              <Link to="/dashBoard/myProduct">My Product</Link>
             </li>
           </ul>
         </div>

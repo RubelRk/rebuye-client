@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { AuthContext } from "../../contexts/AuthProvider/AuthProvider";
 import { Link } from "react-router-dom";
+import img from "../../assets/image/rebuy phone logo transparent.png";
 
 const Header = () => {
   const { user, logOut } = useContext(AuthContext);
@@ -42,12 +43,6 @@ const Header = () => {
               <Link to="/blog">Blog</Link>
             </li>
             <li className="m-2">
-              <Link to="">Rebuy</Link>
-            </li>
-            <li className="m-2">
-              <Link to="">phone</Link>
-            </li>
-            <li className="m-2">
               <Link to="/allProduct">All Product</Link>
             </li>
             <li className="m-2">
@@ -55,9 +50,14 @@ const Header = () => {
             </li>
           </ul>
         </div>
-        <Link className="lg:ml-12 text-base-100 btn btn-ghost normal-case text-xl">
-          RebuyPhone
-        </Link>
+
+        <img
+          alt=""
+          src={img}
+          width="80"
+          height="50"
+          className="lg:ml-12 align-top"
+        />
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="text-base-100 menu menu-horizontal p-0">
@@ -66,12 +66,6 @@ const Header = () => {
           </li>
           <li className="m-2">
             <Link to="/blog">Blog</Link>
-          </li>
-          <li className="m-2">
-            <Link to="">Rebuy</Link>
-          </li>
-          <li className="m-2">
-            <Link to="">phone</Link>
           </li>
           <li className="m-2">
             <Link to="/allProduct">All Product</Link>

@@ -5,6 +5,8 @@ import AllProduct from "../Pages/AllProduct/AllProduct";
 import Blog from "../Pages/Blog/Blog";
 import AllUser from "../Pages/DashBoard/AllUser/AllUser";
 import DashBoard from "../Pages/DashBoard/DashBoard";
+import AddProduct from "../Pages/DashBoard/MyProduct/AddProduct";
+import MyProduct from "../Pages/DashBoard/MyProduct/MyProduct";
 import ErrorPage from "../Pages/ErrorPage/ErrorPage";
 import About from "../Pages/Home/About/About";
 import Home from "../Pages/Home/Home";
@@ -88,6 +90,14 @@ export const router = createBrowserRouter([
         element: <AllUser></AllUser>,
         loader: ({ params }) =>
           fetch(`http://localhost:4000/users/${params.role}`),
+      },
+      {
+        path: "/dashBoard/addProduct",
+        element: <AddProduct></AddProduct>,
+      },
+      {
+        path: "/dashBoard/myProduct",
+        element: <MyProduct></MyProduct>,
       },
     ],
   },

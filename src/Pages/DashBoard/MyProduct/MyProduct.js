@@ -11,7 +11,6 @@ const MyProduct = () => {
         `http://localhost:4000/myProduct?email=${user?.email}`,
         {
           headers: {
-            "content-type": "application/json",
             authorization: `Bearer ${localStorage.getItem("token")}`,
           },
         }
@@ -33,6 +32,7 @@ const MyProduct = () => {
               <th>Image</th>
               <th>Product Name</th>
               <th>Price</th>
+              <th>Status</th>
               <th>Action</th>
             </tr>
           </thead>
@@ -52,6 +52,8 @@ const MyProduct = () => {
 
                 <td>{myProduct?.Product_Name}</td>
                 <td>{myProduct?.resale_price}</td>
+                <td>Available/sold</td>
+
                 <th>
                   <button className="btn btn-ghost btn-xs">Delete</button>
                 </th>

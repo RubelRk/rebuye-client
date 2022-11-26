@@ -9,7 +9,6 @@ const AllProduct = () => {
     queryFn: () =>
       fetch("http://localhost:4000/AllProduct").then((res) => res.json()),
   });
-
   const { loading } = useContext(AuthContext);
   if (loading) {
     return (
@@ -24,11 +23,10 @@ const AllProduct = () => {
       <div className="text-center text-4xl mt-5">
         <h3>Resale Phone</h3>
         <hr className="w-56 mx-auto" />
-        <h3 className="mt-5">Total Product: {allProduct.length}</h3>
+        <h3 className="mt-5">Total Product: {allProduct?.length}</h3>
         <hr className="w-36 mx-auto" />
       </div>
-
-      {allProduct.map((product) => (
+      {allProduct?.map((product) => (
         <AllProductDetails
           key={product._id}
           product={product}

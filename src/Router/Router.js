@@ -14,6 +14,7 @@ import ProductCategoriesDetails from "../Pages/Home/ProductCategories /ProductCa
 import Login from "../Pages/Login/Login";
 import ProductBooking from "../Pages/ProductBooking/ProductBooking";
 import Register from "../Pages/Register/Register";
+import AdminRoute from "./AdminRoute/AdminRoute";
 import PrivateRoute from "./PrivateRoute";
 
 export const router = createBrowserRouter([
@@ -46,16 +47,14 @@ export const router = createBrowserRouter([
         element: <AllProduct></AllProduct>,
       },
       {
-        path: "/ProductCategoriesDetails/:Product_Id",
+        path: "/allProduct/:Brand",
         element: (
           <PrivateRoute>
             <ProductCategoriesDetails></ProductCategoriesDetails>
           </PrivateRoute>
         ),
         loader: ({ params }) =>
-          fetch(
-            `http://localhost:4000/ProductCategoriesDetails/${params.Product_Id}`
-          ),
+          fetch(`http://localhost:4000/AllProduct/${params.Brand}`),
       },
       {
         path: "/ProductBooking/:id",
@@ -87,7 +86,11 @@ export const router = createBrowserRouter([
       },
       {
         path: "/dashBoard/allUser/:role",
-        element: <AllUser></AllUser>,
+        element: (
+          <AdminRoute>
+            <AllUser></AllUser>
+          </AdminRoute>
+        ),
         loader: ({ params }) =>
           fetch(`http://localhost:4000/users/${params.role}`),
       },

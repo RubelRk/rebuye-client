@@ -9,29 +9,34 @@ const ProductCategoriesDetails = () => {
   return (
     <div>
       <h3 className="lg:w-1/2 mx-auto text-2xl my-5">
-        Total Phone: {productDetails.length}
+        <p className="ml-5">
+          <strong className="mr-2">Brand:</strong> {productDetails[0].Brand}
+        </p>
       </h3>
 
       {productDetails.map((productDetail) => (
-        <section key={productDetail._id} setProductBooked={setProductBooked}>
+        <section key={productDetail?._id} setProductBooked={setProductBooked}>
           <div className="lg:w-1/2 mx-auto">
             <div className="m-5 card md:card-side bg-base-300 shadow-xl">
               <figure>
                 <img
                   className="w-36 h-56 m-5 rounded-xl"
-                  src={productDetail.picture}
+                  src={productDetail?.picture}
                   alt="Movie"
                 />
               </figure>
               <div className="card-body">
                 <h2 className="card-title">
-                  Brand: {productDetail.Product_Name}
+                  Brand: {productDetail?.Product_Name}
                 </h2>
 
                 <div className="md:flex justify-around">
-                  {productDetail.roll === "Seller" ? (
+                  <p>Seller: {productDetail?.seller_name}</p>
+                  {/* {productDetail?.Product_Name === "verified" ? (
+                    <p>Seller: {productDetail.seller_name}</p>
+                  ) : (
                     <p>
-                      Seller: {productDetail.seller_name}{" "}
+                      Seller: {productDetail.seller_name}
                       <small className="text-info">Verified Seller</small>
                       <input
                         type="checkbox"
@@ -40,9 +45,8 @@ const ProductCategoriesDetails = () => {
                         className="checkbox checkbox-sm"
                       />
                     </p>
-                  ) : (
-                    <p>Seller: {productDetail.seller_name}</p>
-                  )}
+                  )} */}
+
                   <p>Location: {productDetail.location}</p>
                 </div>
 

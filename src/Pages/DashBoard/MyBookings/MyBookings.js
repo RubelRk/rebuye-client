@@ -11,7 +11,6 @@ const MyBookings = () => {
         `http://localhost:4000/ProductBooking?email=${user?.email}`,
         {
           headers: {
-            "content-type": "application/json",
             authorization: `Bearer ${localStorage.getItem("token")}`,
           },
         }

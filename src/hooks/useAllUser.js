@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-const useAllUser = (email) => {
+const useAllSeller = (email) => {
   const [isSeller, setIsSeller] = useState(false);
   useEffect(() => {
     if (email) {
@@ -13,4 +13,4 @@ const useAllUser = (email) => {
   }, [email]);
   return [isSeller];
 };
-export default useAllUser;
+export default useAllSeller;

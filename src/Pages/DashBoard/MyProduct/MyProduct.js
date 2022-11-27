@@ -49,7 +49,7 @@ const MyProduct = () => {
       .then((res) => res.json())
       .then((data) => {
         if (data.modifiedCount > 0) {
-          toast.success("Verify Successful");
+          toast.success("Advertised Successful");
           refetch();
         }
       });

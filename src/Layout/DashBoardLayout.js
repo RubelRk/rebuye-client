@@ -2,13 +2,14 @@ import React, { useContext } from "react";
 import { Link, Outlet } from "react-router-dom";
 import { AuthContext } from "../contexts/AuthProvider/AuthProvider";
 import useAdmin from "../hooks/useAdmin";
-import useAllUser from "../hooks/useAllUser";
+import useAllSeller from "../hooks/useAllUser";
+
 import Header from "../Pages/Header/Header";
 
 const DashBoardLayout = () => {
   const { user } = useContext(AuthContext);
   const [isAdmin, adminLoading] = useAdmin(user?.email);
-  const [isSeller] = useAllUser(user?.email);
+  const [isSeller] = useAllSeller(user?.email);
 
   if (adminLoading) {
     return (

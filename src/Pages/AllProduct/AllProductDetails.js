@@ -50,7 +50,10 @@ const AllProductDetails = ({ product }) => {
           <p>Release_Time: {posted_time}</p>
 
           <div className="card-actions justify-end">
-            <button className="normal-case btn btn-primary">Book Now</button>
+            <button className="normal-case btn btn-xs btn-primary">
+              Book Now
+            </button>
+            <label className="normal-case btn btn-xs btn-accent">Report</label>
           </div>
         </div>
       </div>

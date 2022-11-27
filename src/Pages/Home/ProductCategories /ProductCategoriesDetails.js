@@ -1,10 +1,52 @@
+import { useQuery } from "@tanstack/react-query";
 import React, { useState } from "react";
+import toast, { Toaster } from "react-hot-toast";
 import { useLoaderData } from "react-router-dom";
 import ProductBooking from "../../ProductBooking/ProductBooking";
 
 const ProductCategoriesDetails = () => {
   const productDetails = useLoaderData({});
   const [productBooked, setProductBooked] = useState();
+  const {
+    data: buyers = [],
+    refetch,
+    isLoading,
+  } = useQuery({
+    queryKey: ["users/Buyer"],
+    queryFn: async () => {
+      const res = await fetch(`http://localhost:4000/users/Buyer`, {
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
+      const data = await res.json();
+      return data;
+    },
+  });
+  console.log(buyers);
+
+  const handleReportItem = (id) => {
+    fetch(`http://localhost:4000/reportProduct/${id}`, {
+      method: "PUT",
+      headers: {
+        authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.modifiedCount > 0) {
+          toast.success("Report Successful");
+          refetch();
+        }
+      });
+  };
+  if (isLoading) {
+    return (
+      <div className="text-center m-56">
+        <button className="btn btn-square loading"></button>
+      </div>
+    );
+  }
 
   return (
     <div>
@@ -62,19 +104,30 @@ const ProductCategoriesDetails = () => {
                 <p>Release_Time: {productDetail.posted_time}</p>
 
                 <div className="card-actions justify-end">
-                  {/* <button className="normal-case btn btn-primary"><Link to={`/ProductBooking/${productDetail._id}`}>Book Now</Link></button> */}
-
                   <label
                     onClick={() => setProductBooked(productDetail)}
                     htmlFor="my-modal-3"
-                    className="normal-case btn btn-primary"
+                    className="normal-case btn btn-xs btn-primary"
                   >
                     Book Now
                   </label>
+                  {productDetail?.report !== "Report Item" ? (
+                    <label
+                      onClick={() => handleReportItem(productDetail?._id)}
+                      className="normal-case btn btn-xs btn-accent"
+                    >
+                      Report
+                    </label>
+                  ) : (
+                    <label className="normal-case btn btn-xs btn-error">
+                      Reported Item
+                    </label>
+                  )}
                 </div>
               </div>
             </div>
           </div>
+          <Toaster></Toaster>
         </section>
       ))}
       {productBooked && (

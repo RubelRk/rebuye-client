@@ -53,6 +53,14 @@ const DashBoardLayout = () => {
                     All Seller
                   </Link>
                 </li>
+                <li>
+                  <Link
+                    className="my-5 btn btn-warning"
+                    to="/dashBoard/reportItem"
+                  >
+                    Report Item
+                  </Link>
+                </li>
               </div>
             )}
             {isAdmin ? (

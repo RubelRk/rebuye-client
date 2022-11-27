@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 
 const AdvertisedItemsDetails = ({ add }) => {
+  const [productBooked, setProductBooked] = useState();
+  console.log(productBooked);
   const {
     picture,
     Product_Name,
@@ -28,10 +30,10 @@ const AdvertisedItemsDetails = ({ add }) => {
             <div className="md:flex justify-around">
               <p>Seller: {seller_name}</p>
               {/* {productDetail?.Product_Name === "verified" ? (
-                    <p>Seller: {productDetail.seller_name}</p>
+                    <p>Seller: {seller_name}</p>
                   ) : (
                     <p>
-                      Seller: {productDetail.seller_name}
+                      Seller: {seller_name}
                       <small className="text-info">Verified Seller</small>
                       <input
                         type="checkbox"
@@ -55,15 +57,15 @@ const AdvertisedItemsDetails = ({ add }) => {
             <p>Release_Time: {posted_time}</p>
 
             <div className="card-actions justify-end">
-              {/* <button className="normal-case btn btn-primary"><Link to={`/ProductBooking/${productDetail._id}`}>Book Now</Link></button> */}
-
-              {/* <label
-                    onClick={() => setProductBooked(productDetail)}
-                    htmlFor="my-modal-3"
-                    className="normal-case btn btn-primary"
-                  >
-                    Book Now
-                  </label> */}
+              <label
+                onClick={() => setProductBooked(add)}
+                className="normal-case btn btn-xs btn-primary"
+              >
+                Book Now
+              </label>
+              <label className="normal-case btn btn-xs btn-accent">
+                Report
+              </label>
             </div>
           </div>
         </div>

@@ -50,7 +50,6 @@ const AllUser = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        toast.success("Delete Successful");
         if (data.deletedCount > 0) {
           toast.success("Delete Successful");
           refetch();

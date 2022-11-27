@@ -3,7 +3,7 @@ import React from "react";
 import AdvertisedItemsDetails from "./AdvertisedItemsDetails";
 
 const AdvertisedItems = () => {
-  const { data: Advertised = [] } = useQuery({
+  const { data: Advertised = [], isLoading } = useQuery({
     queryKey: ["aProduct/Advertised"],
     queryFn: async () => {
       const res = await fetch("http://localhost:4000/aProduct/Advertised", {
@@ -15,7 +15,13 @@ const AdvertisedItems = () => {
       return data;
     },
   });
-  console.log(Advertised.length);
+  if (isLoading) {
+    return (
+      <div className="text-center m-56">
+        <button className="btn btn-square loading"></button>
+      </div>
+    );
+  }
   return (
     <>
       {Advertised?.length ? (

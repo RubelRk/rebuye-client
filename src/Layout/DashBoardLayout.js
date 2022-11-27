@@ -2,11 +2,14 @@ import React, { useContext } from "react";
 import { Link, Outlet } from "react-router-dom";
 import { AuthContext } from "../contexts/AuthProvider/AuthProvider";
 import useAdmin from "../hooks/useAdmin";
+import useAllUser from "../hooks/useAllUser";
 import Header from "../Pages/Header/Header";
 
 const DashBoardLayout = () => {
   const { user } = useContext(AuthContext);
   const [isAdmin, adminLoading] = useAdmin(user?.email);
+  const [isSeller] = useAllUser(user?.email);
+
   if (adminLoading) {
     return (
       <div className="text-center m-56">
@@ -34,10 +37,20 @@ const DashBoardLayout = () => {
             {isAdmin && (
               <div>
                 <li>
-                  <Link to="/dashBoard/allUser/Buyer">All Buyer</Link>
+                  <Link
+                    className="btn btn-info my-5"
+                    to="/dashBoard/allUser/Buyer"
+                  >
+                    All Buyer
+                  </Link>
                 </li>
                 <li>
-                  <Link to="/dashBoard/allUser/Seller">All Seller</Link>
+                  <Link
+                    className="btn btn-accent"
+                    to="/dashBoard/allUser/Seller"
+                  >
+                    All Seller
+                  </Link>
                 </li>
               </div>
             )}
@@ -45,16 +58,35 @@ const DashBoardLayout = () => {
               ""
             ) : (
               <>
-                {" "}
-                <li>
-                  <Link to="/dashBoard">My Orders</Link>
-                </li>
-                <li>
-                  <Link to="/dashBoard/addProduct">Add A Product</Link>
-                </li>
-                <li>
-                  <Link to="/dashBoard/myProduct">My Product</Link>
-                </li>
+                {isSeller && (
+                  <>
+                    <li>
+                      <Link
+                        className="btn btn-info my-5"
+                        to="/dashBoard/addProduct"
+                      >
+                        Add A Product
+                      </Link>
+                    </li>
+                    <li>
+                      <Link
+                        className="btn btn-accent"
+                        to="/dashBoard/myProduct"
+                      >
+                        My Product
+                      </Link>
+                    </li>
+                  </>
+                )}
+                {isSeller ? (
+                  ""
+                ) : (
+                  <li>
+                    <Link className="btn btn-info" to="/dashBoard/myOrder">
+                      My Orders
+                    </Link>
+                  </li>
+                )}
               </>
             )}
           </ul>

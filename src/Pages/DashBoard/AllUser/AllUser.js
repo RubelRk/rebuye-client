@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
-import toast from "react-hot-toast";
+import toast, { Toaster } from "react-hot-toast";
 
 const AllUser = () => {
   //load all Buyer data
@@ -34,6 +34,7 @@ const AllUser = () => {
       .then((res) => res.json())
       .then((data) => {
         if (data.modifiedCount > 0) {
+          toast.success("Verify Successful");
           refetch();
         }
       });
@@ -66,7 +67,7 @@ const AllUser = () => {
 
   return (
     <div>
-      <h2>All User: {buyers.length}</h2>
+      <h2>All Buyer: {buyers.length}</h2>
       <div className="overflow-x-auto w-full">
         <table className="table w-full">
           <thead>
@@ -107,6 +108,7 @@ const AllUser = () => {
             ))}
           </tbody>
         </table>
+        <Toaster></Toaster>
       </div>
     </div>
   );

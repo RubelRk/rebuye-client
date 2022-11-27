@@ -6,6 +6,7 @@ import Blog from "../Pages/Blog/Blog";
 import AllSeller from "../Pages/DashBoard/AllSeller/AllSeller";
 import AllUser from "../Pages/DashBoard/AllUser/AllUser";
 import DashBoard from "../Pages/DashBoard/DashBoard";
+import MyBookings from "../Pages/DashBoard/MyBookings/MyBookings";
 import AddProduct from "../Pages/DashBoard/MyProduct/AddProduct";
 import MyProduct from "../Pages/DashBoard/MyProduct/MyProduct";
 import ErrorPage from "../Pages/ErrorPage/ErrorPage";
@@ -86,13 +87,16 @@ export const router = createBrowserRouter([
         ),
       },
       {
+        path: "/dashBoard/myOrder",
+        element: <MyBookings></MyBookings>,
+      },
+      {
         path: "/dashBoard/allUser/Buyer",
         element: (
           <AdminRoute>
             <AllUser></AllUser>
           </AdminRoute>
         ),
-        loader: () => fetch(`http://localhost:4000/users/Buyer`),
       },
       {
         path: "/dashBoard/allUser/Seller",
@@ -101,7 +105,6 @@ export const router = createBrowserRouter([
             <AllSeller></AllSeller>
           </AdminRoute>
         ),
-        loader: () => fetch(`http://localhost:4000/users/Seller`),
       },
       {
         path: "/dashBoard/addProduct",

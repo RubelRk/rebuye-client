@@ -33,7 +33,7 @@ const Header = () => {
             </svg>
           </label>
           <ul
-            tabIndex={0}
+            tabIndex={1}
             className="text-base-100 menu menu-compact dropdown-content mt-3 p-2 shadow bg-neutral rounded-box w-52"
           >
             <li className="m-2">
@@ -89,7 +89,7 @@ const Header = () => {
         )}
         <label
           htmlFor="dashboard-drawer"
-          tabIndex={0}
+          tabIndex={2}
           className="text-base-100 btn btn-ghost lg:hidden"
         >
           <svg

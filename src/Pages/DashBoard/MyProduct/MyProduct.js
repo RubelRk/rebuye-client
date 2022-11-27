@@ -1,10 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
 import React, { useContext } from "react";
+import toast, { Toaster } from "react-hot-toast";
 import { AuthContext } from "../../../contexts/AuthProvider/AuthProvider";
 
 const MyProduct = () => {
   const { user } = useContext(AuthContext);
-  const { data: myProducts = [] } = useQuery({
+  const { data: myProducts = [], refetch } = useQuery({
     queryKey: ["myProduct", user?.email],
     queryFn: async () => {
       const res = await fetch(
@@ -19,7 +20,39 @@ const MyProduct = () => {
       return data;
     },
   });
+  //Delete product
+  const handleDeleteProduct = (id) => {
+    fetch(`http://localhost:4000/AllProduct/${id}`, {
+      method: "DELETE",
+      headers: {
+        authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.deletedCount > 0) {
+          toast.success("Delete Successful");
+          refetch();
+        }
+      });
+  };
 
+  //update Advertised info
+  const handleAdvertised = (id) => {
+    fetch(`http://localhost:4000//AllProduct/seller/${id}`, {
+      method: "PUT",
+      headers: {
+        authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.modifiedCount > 0) {
+          toast.success("Verify Successful");
+          refetch();
+        }
+      });
+  };
   return (
     <div>
       <h3 className="my-3 text-3xl font-semibold">
@@ -29,17 +62,20 @@ const MyProduct = () => {
         <table className="table w-full">
           <thead>
             <tr>
+              <th>ID</th>
               <th>Image</th>
               <th>Product Name</th>
               <th>Price</th>
               <th>Status</th>
+              <td>Advertised</td>
               <th>Action</th>
             </tr>
           </thead>
 
           <tbody>
             {myProducts.map((myProduct, id) => (
-              <tr key={id}>
+              <tr key={myProduct._id}>
+                <td>{id + 1}</td>
                 <td>
                   <div className="flex items-center space-x-3">
                     <div className="avatar">
@@ -53,14 +89,23 @@ const MyProduct = () => {
                 <td>{myProduct?.Product_Name}</td>
                 <td>{myProduct?.resale_price}</td>
                 <td>Available/sold</td>
+                <td onClick={() => handleAdvertised(myProduct._id)}>
+                  <button className="btn btn-xs btn-accent"> Advertised</button>
+                </td>
 
                 <th>
-                  <button className="btn btn-ghost btn-xs">Delete</button>
+                  <button
+                    onClick={() => handleDeleteProduct(myProduct._id)}
+                    className="btn btn-error btn-xs"
+                  >
+                    Delete
+                  </button>
                 </th>
               </tr>
             ))}
           </tbody>
         </table>
+        <Toaster></Toaster>
       </div>
     </div>
   );

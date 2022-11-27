@@ -1,10 +1,14 @@
 import React from "react";
-import MyBookings from "./MyBookings/MyBookings";
 
 const DashBoard = () => {
   return (
     <div>
-      <MyBookings></MyBookings>
+      <h3 className="text-center font-bold text-2xl my-12">
+        This Is BashBoard
+        <br />
+        Click Your <strong className="hidden md:block">Left Sidebar </strong>
+        <strong className="lg:hidden">Top Right Bar</strong>
+      </h3>
     </div>
   );
 };

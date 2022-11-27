@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
-import toast from "react-hot-toast";
+import toast, { Toaster } from "react-hot-toast";
 
 const AllSeller = () => {
   const { data: Sellers = [], refetch } = useQuery({
@@ -26,6 +26,7 @@ const AllSeller = () => {
       .then((res) => res.json())
       .then((data) => {
         if (data.modifiedCount > 0) {
+          toast.success("Verify Successful");
           refetch();
         }
       });
@@ -40,7 +41,6 @@ const AllSeller = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        toast.success("Delete Successful");
         if (data.deletedCount > 0) {
           toast.success("Delete Successful");
           refetch();
@@ -90,6 +90,7 @@ const AllSeller = () => {
             ))}
           </tbody>
         </table>
+        <Toaster></Toaster>
       </div>
     </div>
   );

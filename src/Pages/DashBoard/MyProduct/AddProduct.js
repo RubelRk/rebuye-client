@@ -10,7 +10,7 @@ const AddProduct = () => {
   const { user } = useContext(AuthContext);
   const { email, displayName } = user;
 
-  const handlePlaceServices = (event) => {
+  const handleAddProduct = (event) => {
     event.preventDefault();
     const form = event.target;
     const Product_Name = form.Product_Name.value;
@@ -70,7 +70,7 @@ const AddProduct = () => {
           </p>
         </div>
         <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
-          <form onSubmit={handlePlaceServices} className="card-body">
+          <form onSubmit={handleAddProduct} className="card-body">
             <div className="form-control">
               <label className="label">
                 <span className="label-text">Product Name</span>

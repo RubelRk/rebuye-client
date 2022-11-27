@@ -38,8 +38,9 @@ const MyProduct = () => {
   };
 
   //update Advertised info
+
   const handleAdvertised = (id) => {
-    fetch(`http://localhost:4000//AllProduct/seller/${id}`, {
+    fetch(`http://localhost:4000/AllProduct/${id}`, {
       method: "PUT",
       headers: {
         authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -89,8 +90,17 @@ const MyProduct = () => {
                 <td>{myProduct?.Product_Name}</td>
                 <td>{myProduct?.resale_price}</td>
                 <td>Available/sold</td>
-                <td onClick={() => handleAdvertised(myProduct._id)}>
-                  <button className="btn btn-xs btn-accent"> Advertised</button>
+                <td>
+                  {myProduct?.productInfo !== "Advertised" ? (
+                    <button
+                      onClick={() => handleAdvertised(myProduct._id)}
+                      className="btn btn-xs btn-accent"
+                    >
+                      ON Add
+                    </button>
+                  ) : (
+                    "Advertised"
+                  )}
                 </td>
 
                 <th>

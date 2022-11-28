@@ -4,10 +4,14 @@ import { AuthContext } from "../../../contexts/AuthProvider/AuthProvider";
 import useTitle from "../../../hooks/useTitle";
 import { useNavigate } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
+import useAllSeller from "../../../hooks/useAllUser";
 
 const AddProduct = () => {
   const { user } = useContext(AuthContext);
   const { email, displayName } = user;
+  const [isVerify] = useAllSeller(email);
+  console.log(isVerify);
+
   useTitle("Add Product");
   const navigate = useNavigate();
   const {
@@ -21,7 +25,8 @@ const AddProduct = () => {
   //handle add Product
 
   const handleAddProduct = (data) => {
-    console.log(data);
+    const resale_price = parseInt(data.resale_price);
+
     const image = data.picture[0];
     const formData = new FormData();
     formData.append("image", image);
@@ -35,16 +40,17 @@ const AddProduct = () => {
         if (imgData.success) {
           const product = {
             Product_Name: data.Product_Name,
-            seller_name: data.displayName,
+            seller_name: data.seller_name,
             picture: imgData.data.url,
             original_price: data.original_price,
-            resale_price: data.resale_price,
+            resale_price: resale_price,
             posted_time: data.posted_time,
             years_of_use: data.years_of_use,
             phoneNumber: data.phoneNumber,
             location: data.location,
             email: data.email,
             Brand: data.Brand,
+            userInfo: data?.verified,
           };
           //upto all data inside all product
 
@@ -64,8 +70,6 @@ const AddProduct = () => {
               }
             })
             .catch((err) => console.error(err));
-
-          console.log(product);
         }
       });
   };
@@ -117,7 +121,7 @@ const AddProduct = () => {
               <span className="label-text">Original Price</span>
             </label>
             <input
-              type="text"
+              type="number"
               {...register("original_price", { required: true })}
               placeholder="Original Price"
               className="input input-bordered w-full max-w-xs"
@@ -133,7 +137,7 @@ const AddProduct = () => {
               <span className="label-text">Resale Price</span>
             </label>
             <input
-              type="text"
+              type="number"
               {...register("resale_price", { required: true })}
               placeholder="Resale Price"
               className="input input-bordered w-full max-w-xs"
@@ -220,6 +224,21 @@ const AddProduct = () => {
               className="input input-bordered w-full max-w-xs"
             />
           </div>
+          {isVerify && (
+            <div className="form-control w-full max-w-xs">
+              <label className="label">
+                <span className="label-text">isVerified</span>
+              </label>
+              <input
+                defaultValue="verified"
+                readOnly
+                type="text"
+                {...register("verified", { required: true })}
+                placeholder="Your verified Info"
+                className="input input-bordered w-full max-w-xs"
+              />
+            </div>
+          )}
 
           <input
             value="Add Product"

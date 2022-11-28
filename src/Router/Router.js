@@ -9,6 +9,7 @@ import DashBoard from "../Pages/DashBoard/DashBoard";
 import MyBookings from "../Pages/DashBoard/MyBookings/MyBookings";
 import AddProduct from "../Pages/DashBoard/MyProduct/AddProduct";
 import MyProduct from "../Pages/DashBoard/MyProduct/MyProduct";
+import Payment from "../Pages/DashBoard/Payment/Payment";
 import ReportItems from "../Pages/DashBoard/ReportItems/ReportItems";
 import ErrorPage from "../Pages/ErrorPage/ErrorPage";
 import About from "../Pages/Home/About/About";
@@ -122,6 +123,12 @@ export const router = createBrowserRouter([
             <ReportItems></ReportItems>
           </AdminRoute>
         ),
+      },
+      {
+        path: "/dashBoard/payment/:id",
+        element: <Payment></Payment>,
+        loader: ({ params }) =>
+          fetch(`http://localhost:4000/bookingData/${params.id}`),
       },
     ],
   },

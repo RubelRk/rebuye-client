@@ -9,10 +9,13 @@ const ProductBooking = ({ productBooked, setProductBooked }) => {
 
   const handleBooking = (event) => {
     event.preventDefault();
+
     const form = event.target;
+    const resale_prices = parseInt(form.resale_price.value);
+    console.log(typeof resale_prices);
     const Product_Name = form.Product_Name.value;
     const email = form.email.value;
-    const resale_price = form.resale_price.value;
+    const resale_price = resale_prices;
     const seller_name = form.seller_name.value;
     const location = form.location.value;
     const phoneNumber = form.phone.value;
@@ -37,7 +40,6 @@ const ProductBooking = ({ productBooked, setProductBooked }) => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         if (data.acknowledged) {
           toast.success("Booking Success");
           setProductBooked(null);

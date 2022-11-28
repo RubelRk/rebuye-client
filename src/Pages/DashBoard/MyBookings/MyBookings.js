@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import React, { useContext } from "react";
+import { Link } from "react-router-dom";
 import { AuthContext } from "../../../contexts/AuthProvider/AuthProvider";
 
 const MyBookings = () => {
@@ -38,25 +39,33 @@ const MyBookings = () => {
           </thead>
 
           <tbody>
-            {myBookings.map((bookings, id) => (
-              <tr key={id}>
-                <td>
-                  <div className="flex items-center space-x-3">
-                    <div className="avatar">
-                      <div className="mask  w-20 h-20">
-                        <img src={bookings?.picture} alt="" />
+            {myBookings &&
+              myBookings?.map((bookings) => (
+                <tr key={bookings?._id}>
+                  <td>
+                    <div className="flex items-center space-x-3">
+                      <div className="avatar">
+                        <div className="mask  w-20 h-20">
+                          <img src={bookings?.picture} alt="" />
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </td>
+                  </td>
 
-                <td>{bookings?.Product_Name}</td>
-                <td>{bookings?.resale_price}</td>
-                <th>
-                  <button className="btn btn-ghost btn-xs">pay</button>
-                </th>
-              </tr>
-            ))}
+                  <td>{bookings?.Product_Name}</td>
+                  <td>${bookings?.resale_price}</td>
+                  <th>
+                    {bookings?.resale_price && !bookings?.paid && (
+                      <Link to={`/dashBoard/payment/${bookings._id}`}>
+                        <button className="btn btn-accent btn-xs">Pay</button>
+                      </Link>
+                    )}
+                    {bookings?.resale_price && bookings?.paid && (
+                      <span className="text-primary">Paid</span>
+                    )}
+                  </th>
+                </tr>
+              ))}
           </tbody>
         </table>
       </div>

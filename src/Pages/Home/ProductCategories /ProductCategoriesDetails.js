@@ -6,6 +6,7 @@ import ProductBooking from "../../ProductBooking/ProductBooking";
 
 const ProductCategoriesDetails = () => {
   const productDetails = useLoaderData({});
+
   const [productBooked, setProductBooked] = useState();
   const {
     data: buyers = [],
@@ -73,12 +74,11 @@ const ProductCategoriesDetails = () => {
                 </h2>
 
                 <div className="md:flex justify-around">
-                  <p>Seller: {productDetail?.seller_name}</p>
-                  {/* {productDetail?.Product_Name === "verified" ? (
-                    <p>Seller: {productDetail.seller_name}</p>
+                  {productDetail?.userInfo !== "verified" ? (
+                    <p>Seller: {productDetail?.seller_name}</p>
                   ) : (
                     <p>
-                      Seller: {productDetail.seller_name}
+                      Seller: {productDetail?.seller_name}
                       <small className="text-info">Verified Seller</small>
                       <input
                         type="checkbox"
@@ -87,17 +87,17 @@ const ProductCategoriesDetails = () => {
                         className="checkbox checkbox-sm"
                       />
                     </p>
-                  )} */}
+                  )}
 
                   <p>Location: {productDetail.location}</p>
                 </div>
 
                 <div className="md:flex justify-around">
                   <p className="text-accent-focus">
-                    Original_Price: {productDetail.original_price}
+                    Original_Price:$ {productDetail.original_price}
                   </p>
                   <p className="text-accent-focus">
-                    Resale_Price: {productDetail.resale_price}
+                    Resale_Price:$ {productDetail.resale_price}
                   </p>
                 </div>
                 <p>Use_Time: {productDetail.years_of_use}</p>

@@ -1,200 +1,235 @@
 import React, { useContext } from "react";
-import toast from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
+import { useForm } from "react-hook-form";
 import { AuthContext } from "../../../contexts/AuthProvider/AuthProvider";
 import useTitle from "../../../hooks/useTitle";
+import { useNavigate } from "react-router-dom";
+import toast, { Toaster } from "react-hot-toast";
 
 const AddProduct = () => {
-  const navigate = useNavigate();
-  useTitle("Add Product");
   const { user } = useContext(AuthContext);
   const { email, displayName } = user;
+  useTitle("Add Product");
+  const navigate = useNavigate();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
-  const handleAddProduct = (event) => {
-    event.preventDefault();
-    const form = event.target;
-    const Product_Name = form.Product_Name.value;
-    const picture = form.picture.value;
-    const original_price = form.original_price.value;
-    const resale_price = form.resale_price.value;
-    const posted_time = form.posted_time.value;
-    const years_of_use = form.years_of_use.value;
-    const phoneNumber = form.phoneNumber.value;
-    const location = form.location.value;
+  const imageHostKey = process.env.REACT_APP_img_key;
 
-    const Brand = form.Brand.value;
+  //handle add Product
 
-    const orders = {
-      Product_Name,
-      seller_name: displayName,
-      picture,
-      original_price,
-      resale_price,
-      posted_time,
-      years_of_use,
-      phoneNumber,
-      location,
-      email,
-      Brand,
-    };
-    if (!picture) {
-      toast.error("Places Input One Image");
-    } else {
-      fetch("http://localhost:4000/AllProduct", {
-        method: "POST",
-        headers: {
-          "content-type": "application/json",
-          authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-        body: JSON.stringify(orders),
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          if (data.acknowledged) {
-            toast.success("Review Placed Successfully");
-            form.reset();
-            navigate("/dashBoard/myProduct");
-          }
-        })
-        .catch((err) => console.error(err));
-    }
+  const handleAddProduct = (data) => {
+    console.log(data);
+    const image = data.picture[0];
+    const formData = new FormData();
+    formData.append("image", image);
+    const url = `https://api.imgbb.com/1/upload?expiration=600&key=${imageHostKey}`;
+    fetch(url, {
+      method: "POST",
+      body: formData,
+    })
+      .then((res) => res.json())
+      .then((imgData) => {
+        if (imgData.success) {
+          const product = {
+            Product_Name: data.Product_Name,
+            seller_name: data.displayName,
+            picture: imgData.data.url,
+            original_price: data.original_price,
+            resale_price: data.resale_price,
+            posted_time: data.posted_time,
+            years_of_use: data.years_of_use,
+            phoneNumber: data.phoneNumber,
+            location: data.location,
+            email: data.email,
+            Brand: data.Brand,
+          };
+          //upto all data inside all product
+
+          fetch("http://localhost:4000/AllProduct", {
+            method: "POST",
+            headers: {
+              "content-type": "application/json",
+              authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+            body: JSON.stringify(product),
+          })
+            .then((res) => res.json())
+            .then((result) => {
+              if (result.acknowledged) {
+                toast.success("Review Placed Successfully");
+                navigate("/dashBoard/myProduct");
+              }
+            })
+            .catch((err) => console.error(err));
+
+          console.log(product);
+        }
+      });
   };
-
   return (
-    <div className="hero min-h-screen bg-base-200">
-      <div className="hero-content flex-col md:w-1/2 ">
-        <div className="text-center lg:text-left">
-          <h1 className="text-3xl font-bold">Will You Sell Phone!</h1>
-          <p className="py-2">
-            Please Adding Your Phone Detail And <br /> Your Information.
-          </p>
-        </div>
-        <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
-          <form onSubmit={handleAddProduct} className="card-body">
-            <div className="form-control">
-              <label className="label">
-                <span className="label-text">Product Name</span>
-              </label>
-              <input
-                required
-                type="text"
-                name="Product_Name"
-                placeholder="Product Name"
-                className="input input-bordered"
-              />
-              <label className="label">
-                <span className="label-text">Seller Name</span>
-              </label>
-              <input
-                defaultValue={displayName}
-                disabled
-                type="text"
-                name="seller_name"
-                placeholder="Seller Name"
-                className="input input-bordered"
-              />
-              <label className="label">
-                <span className="label-text">Phone Picture</span>
-              </label>
-              <input
-                required
-                type="picture"
-                name="picture"
-                placeholder="Picture"
-                className="input input-bordered"
-              />
-              <label className="label">
-                <span className="label-text">Original Price</span>
-              </label>
-              <input
-                required
-                type="text"
-                name="original_price"
-                placeholder="Original Price"
-                className="input input-bordered"
-              />
-              <label className="label">
-                <span className="label-text">Resale Price</span>
-              </label>
-              <input
-                required
-                type="text"
-                name="resale_price"
-                placeholder="Resale Price"
-                className="input input-bordered"
-              />
-              <label className="label">
-                <span className="label-text">Posted Time</span>
-              </label>
-              <input
-                required
-                type="text"
-                name="posted_time"
-                placeholder="Posted Time"
-                className="input input-bordered"
-              />
-              <label className="label">
-                <span className="label-text">Years Of Use</span>
-              </label>
-              <input
-                required
-                type="text"
-                name="years_of_use"
-                placeholder="Years Of Use"
-                className="input input-bordered"
-              />
-              <label className="label">
-                <span className="label-text">Phone Number</span>
-              </label>
-              <input
-                required
-                type="number"
-                name="phoneNumber"
-                placeholder="Phone Number"
-                className="input input-bordered"
-              />
-              <label className="label">
-                <span className="label-text">Location</span>
-              </label>
-              <input
-                required
-                type="text"
-                name="location"
-                placeholder="Location"
-                className="input input-bordered"
-              />
-              <label className="label">
-                <span className="label-text">Email</span>
-              </label>
-              <input
-                defaultValue={email}
-                disabled
-                type="email"
-                name="email"
-                placeholder="Your Email"
-                className="input input-bordered"
-              />
-            </div>
-            <div className="form-control">
-              <label className="label">
-                <span className="label-text">Phone Brand</span>
-              </label>
-              <select
-                required
-                name="Brand"
-                defaultValue="Apple"
-                className="select select-bordered w-full"
-              >
-                <option value="Apple">Apple</option>
-                <option value="Samsung">Samsung</option>
-                <option value="Xioami">Xioami</option>
-              </select>
-            </div>
-            <button className="btn btn-primary">Submit</button>
-          </form>
-        </div>
+    <>
+      <div className="text-center">
+        <h1 className="text-3xl font-bold">Will You Sell Phone!</h1>
+        <p className="py-2">
+          Please Adding Your Phone Detail And <br /> Your Information.
+        </p>
       </div>
-    </div>
+      <div className="h-[1050px] flex  justify-center">
+        <form
+          className="shadow-2xl bg-base-100 p-8"
+          onSubmit={handleSubmit(handleAddProduct)}
+        >
+          <div className="form-control w-full max-w-xs">
+            <label className="label">
+              <span className="label-text">Product Name</span>
+            </label>
+            <input
+              type="text"
+              {...register("Product_Name", { required: true })}
+              placeholder="Product Name"
+              className="input input-bordered w-full max-w-xs"
+            />
+            <p>
+              {errors.Product_Name && (
+                <span> {errors.Product_Name.message}</span>
+              )}
+            </p>
+          </div>
+
+          <div className="form-control w-full max-w-xs">
+            <label className="label">
+              <span className="label-text">Seller Name</span>
+            </label>
+            <input
+              defaultValue={displayName}
+              readOnly
+              type="text"
+              {...register("seller_name", { required: true })}
+              placeholder="seller_name"
+              className="input input-bordered w-full max-w-xs"
+            />
+          </div>
+          <div className="form-control w-full max-w-xs">
+            <label className="label">
+              <span className="label-text">Original Price</span>
+            </label>
+            <input
+              type="text"
+              {...register("original_price", { required: true })}
+              placeholder="Original Price"
+              className="input input-bordered w-full max-w-xs"
+            />
+            <p>
+              {errors.original_price && (
+                <span> {errors.original_price.message}</span>
+              )}
+            </p>
+          </div>
+          <div className="form-control w-full max-w-xs">
+            <label className="label">
+              <span className="label-text">Resale Price</span>
+            </label>
+            <input
+              type="text"
+              {...register("resale_price", { required: true })}
+              placeholder="Resale Price"
+              className="input input-bordered w-full max-w-xs"
+            />
+          </div>
+          <div className="form-control w-full max-w-xs">
+            <label className="label">
+              <span className="label-text">Posted Time</span>
+            </label>
+            <input
+              type="text"
+              {...register("posted_time", { required: true })}
+              placeholder="Posted Time"
+              className="input input-bordered w-full max-w-xs"
+            />
+          </div>
+          <div className="form-control w-full max-w-xs">
+            <label className="label">
+              <span className="label-text">Years Of Use</span>
+            </label>
+            <input
+              type="text"
+              {...register("years_of_use", { required: true })}
+              placeholder="Years Of Use"
+              className="input input-bordered w-full max-w-xs"
+            />
+          </div>
+          <div className="form-control w-full max-w-xs">
+            <label className="label">
+              <span className="label-text">Phone Number</span>
+            </label>
+            <input
+              type="text"
+              {...register("phoneNumber", { required: true })}
+              placeholder="Phone Number"
+              className="input input-bordered w-full max-w-xs"
+            />
+          </div>
+          <div className="form-control w-full max-w-xs">
+            <label className="label">
+              <span className="label-text">Location</span>
+            </label>
+            <input
+              type="text"
+              {...register("location", { required: true })}
+              placeholder="Location"
+              className="input input-bordered w-full max-w-xs"
+            />
+          </div>
+          <div className="form-control w-full max-w-xs">
+            <label className="label">
+              <span className="label-text">Product Picture</span>
+            </label>
+            <input
+              type="file"
+              {...register("picture", { required: true })}
+              placeholder="Product Picture"
+              className="input input-bordered w-full max-w-xs"
+            />
+          </div>
+          <div className="form-control w-full max-w-xs">
+            <label className="label">
+              <span className="label-text">Brand</span>
+            </label>
+            <select
+              className="select select-bordered w-full"
+              {...register("Brand", { required: true })}
+            >
+              <option value="Apple">Apple</option>
+              <option value="Samsung">Samsung</option>
+              <option value="Xioami">Xioami</option>
+            </select>
+          </div>
+          <div className="form-control w-full max-w-xs">
+            <label className="label">
+              <span className="label-text">Email</span>
+            </label>
+            <input
+              defaultValue={email}
+              readOnly
+              type="email"
+              {...register("email", { required: true })}
+              placeholder="Your email"
+              className="input input-bordered w-full max-w-xs"
+            />
+          </div>
+
+          <input
+            value="Add Product"
+            className="mt-8 btn btn-primary w-full "
+            type="submit"
+          />
+        </form>
+        <Toaster></Toaster>
+      </div>
+    </>
   );
 };
 

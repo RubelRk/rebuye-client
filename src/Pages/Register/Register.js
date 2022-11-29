@@ -15,6 +15,7 @@ const Register = () => {
   const [error, setError] = useState("");
   const [emailData, setEmailData] = useState("");
   const [token] = useToken(emailData);
+  console.log(token);
   if (token) {
     navigate(from, { replace: true });
   }
@@ -32,6 +33,7 @@ const Register = () => {
       .then((res) => {
         const user = res.user;
         console.log(user);
+
         navigate(from, { replace: true });
       })
       .catch((err) => console.error(err));

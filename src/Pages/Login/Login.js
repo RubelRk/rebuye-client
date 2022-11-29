@@ -6,6 +6,7 @@ import useTitle from "../../hooks/useTitle";
 import useToken from "../../hooks/useToken";
 
 const Login = () => {
+  useTitle("Login");
   const [error, setError] = useState("");
   useTitle("Login");
   const { loading, setLoading, logInUser, googleSignIn } =

@@ -2,9 +2,11 @@ import { useQuery } from "@tanstack/react-query";
 import React, { useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { useLoaderData } from "react-router-dom";
+import useTitle from "../../../hooks/useTitle";
 import ProductBooking from "../../ProductBooking/ProductBooking";
 
 const ProductCategoriesDetails = () => {
+  useTitle("ProductCategoriesDetails");
   const productDetails = useLoaderData({});
 
   const [productBooked, setProductBooked] = useState();

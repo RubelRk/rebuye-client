@@ -1,6 +1,8 @@
 import React from "react";
+import useTitle from "../../hooks/useTitle";
 
 const AllProductDetails = ({ product }) => {
+  useTitle("AllProductDetails");
   const {
     Product_Name,
     location,

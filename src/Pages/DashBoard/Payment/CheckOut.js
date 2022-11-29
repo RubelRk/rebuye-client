@@ -1,8 +1,10 @@
 import React, { useContext, useEffect, useState } from "react";
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import { AuthContext } from "../../../contexts/AuthProvider/AuthProvider";
+import useTitle from "../../../hooks/useTitle";
 
 const CheckOut = ({ bookingDataS }) => {
+  useTitle("CheckOut");
   const { loading } = useContext(AuthContext);
   const [clientSecret, setClientSecret] = useState("");
   const { resale_price, seller_name, email, _id } = bookingDataS;

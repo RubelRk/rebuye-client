@@ -1,8 +1,10 @@
 import React, { useContext } from "react";
 import { AuthContext } from "../../contexts/AuthProvider/AuthProvider";
 import toast, { Toaster } from "react-hot-toast";
+import useTitle from "../../hooks/useTitle";
 
 const ProductBooking = ({ productBooked, setProductBooked }) => {
+  useTitle("ProductBooking");
   const { Product_Name, picture, resale_price, seller_name } = productBooked;
 
   const { user } = useContext(AuthContext);

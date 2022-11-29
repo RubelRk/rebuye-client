@@ -1,8 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import toast, { Toaster } from "react-hot-toast";
+import useTitle from "../../../hooks/useTitle";
 
 const ReportItems = () => {
+  useTitle("ReportItems");
   const {
     data: reportItem = [],
     refetch,

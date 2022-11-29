@@ -5,7 +5,7 @@ const useAdmin = (email) => {
   const [adminLoading, setAdminLoading] = useState(true);
   useEffect(() => {
     if (email) {
-      fetch(`http://localhost:4000/users/admin/${email}`, {
+      fetch(`https://rebuy-phone-server.vercel.app/users/admin/${email}`, {
         headers: {
           authorization: `Bearer ${localStorage.getItem("token")}`,
         },

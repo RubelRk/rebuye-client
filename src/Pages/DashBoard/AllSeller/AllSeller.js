@@ -6,18 +6,21 @@ const AllSeller = () => {
   const { data: Sellers = [], refetch } = useQuery({
     queryKey: ["users/Buyer"],
     queryFn: async () => {
-      const res = await fetch(`http://localhost:4000/users/Seller`, {
-        headers: {
-          authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      });
+      const res = await fetch(
+        `https://rebuy-phone-server.vercel.app/users/Seller`,
+        {
+          headers: {
+            authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      );
       const data = await res.json();
       return data;
     },
   });
 
   const handleVerify = (id) => {
-    fetch(`http://localhost:4000/users/admin/${id}`, {
+    fetch(`https://rebuy-phone-server.vercel.app/users/admin/${id}`, {
       method: "PUT",
       headers: {
         authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -33,7 +36,7 @@ const AllSeller = () => {
   };
 
   const handleDeleteUser = (id) => {
-    fetch(`http://localhost:4000/users/${id}`, {
+    fetch(`https://rebuy-phone-server.vercel.app/users/${id}`, {
       method: "DELETE",
       headers: {
         authorization: `Bearer ${localStorage.getItem("token")}`,

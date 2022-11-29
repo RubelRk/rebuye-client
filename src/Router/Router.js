@@ -12,7 +12,6 @@ import MyProduct from "../Pages/DashBoard/MyProduct/MyProduct";
 import Payment from "../Pages/DashBoard/Payment/Payment";
 import ReportItems from "../Pages/DashBoard/ReportItems/ReportItems";
 import ErrorPage from "../Pages/ErrorPage/ErrorPage";
-import About from "../Pages/Home/About/About";
 import Home from "../Pages/Home/Home";
 import ProductCategoriesDetails from "../Pages/Home/ProductCategories /ProductCategoriesDetails";
 import Login from "../Pages/Login/Login";
@@ -35,10 +34,6 @@ export const router = createBrowserRouter([
         element: <Blog></Blog>,
       },
       {
-        path: "/about",
-        element: <About></About>,
-      },
-      {
         path: "/login",
         element: <Login></Login>,
       },
@@ -58,7 +53,9 @@ export const router = createBrowserRouter([
           </PrivateRoute>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:4000/AllProduct/${params.Brand}`),
+          fetch(
+            `https://rebuy-phone-server.vercel.app/AllProduct/${params.Brand}`
+          ),
       },
       {
         path: "/ProductBooking/:id",
@@ -68,7 +65,9 @@ export const router = createBrowserRouter([
           </PrivateRoute>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:4000/ProductBooking/${params.id}`),
+          fetch(
+            `https://rebuy-phone-server.vercel.app/ProductBooking/${params.id}`
+          ),
       },
     ],
   },
@@ -128,7 +127,9 @@ export const router = createBrowserRouter([
         path: "/dashBoard/payment/:id",
         element: <Payment></Payment>,
         loader: ({ params }) =>
-          fetch(`http://localhost:4000/bookingData/${params.id}`),
+          fetch(
+            `https://rebuy-phone-server.vercel.app/bookingData/${params.id}`
+          ),
       },
     ],
   },

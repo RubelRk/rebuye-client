@@ -69,7 +69,7 @@ const Register = () => {
 
   const saveUser = (name, email, role) => {
     const user = { name, email, role };
-    fetch("http://localhost:4000/users", {
+    fetch("https://rebuy-phone-server.vercel.app/users", {
       method: "POST",
       headers: {
         "content-type": "application/json",

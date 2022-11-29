@@ -6,11 +6,14 @@ const AdvertisedItems = () => {
   const { data: Advertised = [], isLoading } = useQuery({
     queryKey: ["aProduct/Advertised"],
     queryFn: async () => {
-      const res = await fetch("http://localhost:4000/aProduct/Advertised", {
-        headers: {
-          authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      });
+      const res = await fetch(
+        "https://rebuy-phone-server.vercel.app/aProduct/Advertised",
+        {
+          headers: {
+            authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      );
       const data = await res.json();
       return data;
     },

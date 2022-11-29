@@ -15,11 +15,14 @@ const ProductCategoriesDetails = () => {
   } = useQuery({
     queryKey: ["users/Buyer"],
     queryFn: async () => {
-      const res = await fetch(`http://localhost:4000/users/Buyer`, {
-        headers: {
-          authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      });
+      const res = await fetch(
+        `https://rebuy-phone-server.vercel.app/users/Buyer`,
+        {
+          headers: {
+            authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      );
       const data = await res.json();
       return data;
     },
@@ -27,7 +30,7 @@ const ProductCategoriesDetails = () => {
   console.log(buyers);
 
   const handleReportItem = (id) => {
-    fetch(`http://localhost:4000/reportProduct/${id}`, {
+    fetch(`https://rebuy-phone-server.vercel.app/reportProduct/${id}`, {
       method: "PUT",
       headers: {
         authorization: `Bearer ${localStorage.getItem("token")}`,

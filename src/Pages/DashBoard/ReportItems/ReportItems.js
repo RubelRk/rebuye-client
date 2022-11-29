@@ -11,7 +11,7 @@ const ReportItems = () => {
     queryKey: ["reportItems/Report%20Item"],
     queryFn: async () => {
       const res = await fetch(
-        `http://localhost:4000/reportItems/Report%20Item`,
+        `https://rebuy-phone-server.vercel.app/reportItems/Report%20Item`,
         {
           headers: {
             authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -23,7 +23,7 @@ const ReportItems = () => {
     },
   });
   const handleDeleteUser = (id) => {
-    fetch(`http://localhost:4000/AllProduct/${id}`, {
+    fetch(`https://rebuy-phone-server.vercel.app/AllProduct/${id}`, {
       method: "DELETE",
       headers: {
         authorization: `Bearer ${localStorage.getItem("token")}`,

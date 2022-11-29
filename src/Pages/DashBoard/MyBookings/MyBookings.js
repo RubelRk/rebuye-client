@@ -9,7 +9,7 @@ const MyBookings = () => {
     queryKey: ["ProductBooking", user?.email],
     queryFn: async () => {
       const res = await fetch(
-        `http://localhost:4000/ProductBooking?email=${user?.email}`,
+        `https://rebuy-phone-server.vercel.app/ProductBooking?email=${user?.email}`,
         {
           headers: {
             authorization: `Bearer ${localStorage.getItem("token")}`,

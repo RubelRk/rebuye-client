@@ -54,7 +54,7 @@ const AddProduct = () => {
           };
           //upto all data inside all product
 
-          fetch("http://localhost:4000/AllProduct", {
+          fetch("https://rebuy-phone-server.vercel.app/AllProduct", {
             method: "POST",
             headers: {
               "content-type": "application/json",

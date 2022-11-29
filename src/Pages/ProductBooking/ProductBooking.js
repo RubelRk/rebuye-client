@@ -31,7 +31,7 @@ const ProductBooking = ({ productBooked, setProductBooked }) => {
       picture,
     };
 
-    fetch("http://localhost:4000/ProductBooking", {
+    fetch("https://rebuy-phone-server.vercel.app/ProductBooking", {
       method: "POST",
       headers: {
         "content-type": "application/json",

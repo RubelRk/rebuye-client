@@ -7,7 +7,9 @@ const AllProduct = () => {
   const { data: allProduct = [] } = useQuery({
     queryKey: ["AllProduct"],
     queryFn: () =>
-      fetch("http://localhost:4000/AllProduct").then((res) => res.json()),
+      fetch("https://rebuy-phone-server.vercel.app/AllProduct").then((res) =>
+        res.json()
+      ),
   });
   const { loading } = useContext(AuthContext);
   if (loading) {

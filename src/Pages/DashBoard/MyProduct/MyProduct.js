@@ -9,7 +9,7 @@ const MyProduct = () => {
     queryKey: ["myProduct", user?.email],
     queryFn: async () => {
       const res = await fetch(
-        `http://localhost:4000/myProduct?email=${user?.email}`,
+        `https://rebuy-phone-server.vercel.app/myProduct?email=${user?.email}`,
         {
           headers: {
             authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -22,7 +22,7 @@ const MyProduct = () => {
   });
   //Delete product
   const handleDeleteProduct = (id) => {
-    fetch(`http://localhost:4000/AllProduct/${id}`, {
+    fetch(`https://rebuy-phone-server.vercel.app/AllProduct/${id}`, {
       method: "DELETE",
       headers: {
         authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -40,7 +40,7 @@ const MyProduct = () => {
   //update Advertised info
 
   const handleAdvertised = (id) => {
-    fetch(`http://localhost:4000/AllProduct/${id}`, {
+    fetch(`https://rebuy-phone-server.vercel.app/AllProduct/${id}`, {
       method: "PUT",
       headers: {
         authorization: `Bearer ${localStorage.getItem("token")}`,

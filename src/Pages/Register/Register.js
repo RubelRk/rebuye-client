@@ -33,7 +33,7 @@ const Register = () => {
       .then((res) => {
         const user = res.user;
         console.log(user);
-
+        setEmailData(user.email);
         navigate(from, { replace: true });
       })
       .catch((err) => console.error(err));

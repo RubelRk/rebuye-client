@@ -53,9 +53,7 @@ export const router = createBrowserRouter([
           </PrivateRoute>
         ),
         loader: ({ params }) =>
-          fetch(
-            `https://rebuy-phone-server.vercel.app/AllProduct/${params.Brand}`
-          ),
+          fetch(`${process.env.REACT_APP_API}/AllProduct/${params.Brand}`),
       },
       {
         path: "/ProductBooking/:id",
@@ -65,9 +63,7 @@ export const router = createBrowserRouter([
           </PrivateRoute>
         ),
         loader: ({ params }) =>
-          fetch(
-            `https://rebuy-phone-server.vercel.app/ProductBooking/${params.id}`
-          ),
+          fetch(`${process.env.REACT_APP_API}/ProductBooking/${params.id}`),
       },
     ],
   },
@@ -127,9 +123,7 @@ export const router = createBrowserRouter([
         path: "/dashBoard/payment/:id",
         element: <Payment></Payment>,
         loader: ({ params }) =>
-          fetch(
-            `https://rebuy-phone-server.vercel.app/bookingData/${params.id}`
-          ),
+          fetch(`${process.env.REACT_APP_API}/bookingData/${params.id}`),
       },
     ],
   },

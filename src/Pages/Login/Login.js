@@ -65,7 +65,7 @@ const Login = () => {
 
   const saveUser = (name, email) => {
     const user = { name, email };
-    fetch("https://rebuy-phone-server.vercel.app/users", {
+    fetch(`${process.env.REACT_APP_API}/users`, {
       method: "POST",
       headers: {
         "content-type": "application/json",

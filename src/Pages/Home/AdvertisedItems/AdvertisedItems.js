@@ -7,7 +7,7 @@ const AdvertisedItems = () => {
     queryKey: ["aProduct/Advertised"],
     queryFn: async () => {
       const res = await fetch(
-        "https://rebuy-phone-server.vercel.app/aProduct/Advertised",
+        `${process.env.REACT_APP_API}/aProduct/Advertised`,
         {
           headers: {
             authorization: `Bearer ${localStorage.getItem("token")}`,

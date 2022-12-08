@@ -5,7 +5,7 @@ const useToken = (email) => {
   console.log(token);
   useEffect(() => {
     if (email) {
-      fetch(`http://localhost:4000/jwt?email=${email}`)
+      fetch(`${process.env.REACT_APP_API}/jwt?email=${email}`)
         .then((res) => res.json())
         .then((data) => {
           if (data.token) {

@@ -6,7 +6,7 @@ const useAllSeller = (email) => {
   // console.log("outside ", isVerify);
   useEffect(() => {
     if (email) {
-      // fetch(`https://rebuy-phone-server.vercel.app/users/seller/${email}`)
+      // fetch(`${process.env.REACT_APP_API}/users/seller/${email}`)
       //   .then((res) => res.json())
       //   .then((data) => {
       //     setIsSeller(data.isSeller);
@@ -15,7 +15,7 @@ const useAllSeller = (email) => {
       //   });
       const fetchData = async () => {
         const res = await fetch(
-          `https://rebuy-phone-server.vercel.app/users/seller/${email}`
+          `${process.env.REACT_APP_API}/users/seller/${email}`
         );
         const data = await res.json();
         setIsSeller(data.isSeller);

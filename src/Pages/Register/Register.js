@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import toast from "react-hot-toast";
+import toast, { Toaster } from "react-hot-toast";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthProvider/AuthProvider";
 import useTitle from "../../hooks/useTitle";
@@ -15,7 +15,6 @@ const Register = () => {
   const [error, setError] = useState("");
   const [emailData, setEmailData] = useState("");
   const [token] = useToken(emailData);
-  console.log(token);
   if (token) {
     navigate(from, { replace: true });
   }
@@ -73,7 +72,7 @@ const Register = () => {
 
   const saveUser = (name, email, role) => {
     const user = { name, email, role };
-    fetch("https://rebuy-phone-server.vercel.app/users", {
+    fetch(`${process.env.REACT_APP_API}/users`, {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -82,6 +81,7 @@ const Register = () => {
     })
       .then((res) => res.json())
       .then((data) => {
+        toast.success("Login Successful");
         setEmailData(email);
       });
   };
@@ -160,6 +160,7 @@ const Register = () => {
               <button className="btn btn-primary">Login</button>
             </div>
           </form>
+          <Toaster></Toaster>
         </div>
       </div>
     </div>

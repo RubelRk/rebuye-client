@@ -36,7 +36,7 @@ const ProductBooking = ({ productBooked, setProductBooked }) => {
       //new add  productId: _id,
     };
 
-    fetch("https://rebuy-phone-server.vercel.app/ProductBooking", {
+    fetch(`${process.env.REACT_APP_API}/ProductBooking`, {
       method: "POST",
       headers: {
         "content-type": "application/json",

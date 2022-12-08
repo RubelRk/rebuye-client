@@ -11,7 +11,7 @@ const MyProduct = () => {
     queryKey: ["myProduct", user?.email],
     queryFn: async () => {
       const res = await fetch(
-        `https://rebuy-phone-server.vercel.app/myProduct?email=${user?.email}`,
+        `${process.env.REACT_APP_API}/myProduct?email=${user?.email}`,
         {
           headers: {
             authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -24,7 +24,7 @@ const MyProduct = () => {
   });
   //Delete product
   const handleDeleteProduct = (id) => {
-    fetch(`https://rebuy-phone-server.vercel.app/AllProduct/${id}`, {
+    fetch(`${process.env.REACT_APP_API}/AllProduct/${id}`, {
       method: "DELETE",
       headers: {
         authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -42,7 +42,7 @@ const MyProduct = () => {
   //update Advertised info
 
   const handleAdvertised = (id) => {
-    fetch(`https://rebuy-phone-server.vercel.app/AllProduct/${id}`, {
+    fetch(`${process.env.REACT_APP_API}/AllProduct/${id}`, {
       method: "PUT",
       headers: {
         authorization: `Bearer ${localStorage.getItem("token")}`,

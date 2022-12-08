@@ -14,14 +14,11 @@ const AllUser = () => {
   } = useQuery({
     queryKey: ["users/Buyer"],
     queryFn: async () => {
-      const res = await fetch(
-        `https://rebuy-phone-server.vercel.app/users/Buyer`,
-        {
-          headers: {
-            authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        }
-      );
+      const res = await fetch(`${process.env.REACT_APP_API}/users/Buyer`, {
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
       const data = await res.json();
       return data;
     },
@@ -30,7 +27,7 @@ const AllUser = () => {
   //Verify Buyer data
 
   const handleVerify = (id) => {
-    fetch(`https://rebuy-phone-server.vercel.app/users/admin/${id}`, {
+    fetch(`${process.env.REACT_APP_API}/users/admin/${id}`, {
       method: "PUT",
       headers: {
         authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -47,7 +44,7 @@ const AllUser = () => {
 
   //Delete Buyer Data
   const handleDeleteUser = (id) => {
-    fetch(`https://rebuy-phone-server.vercel.app/users/${id}`, {
+    fetch(`${process.env.REACT_APP_API}/users/${id}`, {
       method: "DELETE",
       headers: {
         authorization: `Bearer ${localStorage.getItem("token")}`,

@@ -56,7 +56,7 @@ const AddProduct = () => {
           };
           //upto all data inside all product
 
-          fetch("https://rebuy-phone-server.vercel.app/AllProduct", {
+          fetch(`${process.env.REACT_APP_API}/AllProduct`, {
             method: "POST",
             headers: {
               "content-type": "application/json",

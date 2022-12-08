@@ -19,7 +19,7 @@ const CheckOut = ({ bookingDataS }) => {
   const elements = useElements();
 
   useEffect(() => {
-    fetch("https://rebuy-phone-server.vercel.app/create-payment-intent", {
+    fetch(`${process.env.REACT_APP_API}/create-payment-intent`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -80,7 +80,7 @@ const CheckOut = ({ bookingDataS }) => {
         email,
         bookingId: _id,
       };
-      fetch("http://localhost:4000/payments", {
+      fetch(`${process.env.REACT_APP_API}/payments`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

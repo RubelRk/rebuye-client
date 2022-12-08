@@ -13,7 +13,7 @@ const ReportItems = () => {
     queryKey: ["reportItems/Report%20Item"],
     queryFn: async () => {
       const res = await fetch(
-        `https://rebuy-phone-server.vercel.app/reportItems/Report%20Item`,
+        `${process.env.REACT_APP_API}/reportItems/Report%20Item`,
         {
           headers: {
             authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -25,7 +25,7 @@ const ReportItems = () => {
     },
   });
   const handleDeleteUser = (id) => {
-    fetch(`https://rebuy-phone-server.vercel.app/AllProduct/${id}`, {
+    fetch(`${process.env.REACT_APP_API}/AllProduct/${id}`, {
       method: "DELETE",
       headers: {
         authorization: `Bearer ${localStorage.getItem("token")}`,

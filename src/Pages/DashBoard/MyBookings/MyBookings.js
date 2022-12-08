@@ -11,7 +11,7 @@ const MyBookings = () => {
     queryKey: ["ProductBooking", user?.email],
     queryFn: async () => {
       const res = await fetch(
-        `https://rebuy-phone-server.vercel.app/ProductBooking?email=${user?.email}`,
+        `${process.env.REACT_APP_API}/ProductBooking?email=${user?.email}`,
         {
           headers: {
             authorization: `Bearer ${localStorage.getItem("token")}`,

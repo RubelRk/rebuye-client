@@ -32,11 +32,13 @@ const Register = () => {
     googleSignIn()
       .then((res) => {
         const user = res.user;
-        console.log(user);
-        setEmailData(user.email);
-        navigate(from, { replace: true });
+        const { displayName, email } = user;
+        saveUser(displayName, email);
       })
-      .catch((err) => console.error(err));
+      .catch((err) => {
+        setLoading(false);
+        console.error(err);
+      });
   };
 
   const handleSubmit = (event) => {

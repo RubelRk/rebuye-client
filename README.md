@@ -2,6 +2,19 @@
 
 - Rebuy Phone
 
+## Project Description.
+
+- Payment Option(Only Buyer)
+- Admin Dashboard (Only Admin)
+- Admin Verify, Delete Any Seller and Buyer,see the reported Product in report Items Button
+- Seller Add Product, Advertisement And Delete
+- Seller Click Advertise Button Then show Home Screen Advertisement Section
+- Buyer Report Any Product , Booking Any Product in dashboard, Pay The Product Payment in stripe payment method
+- Use JWT security
+- Create Buyer and Seller Account
+- All Data Are Save in MongoDB
+- Image Host ImgBB
+
 ## Website Link.
 
 - LiveURL: https://rebuy-phone.web.app/
@@ -13,7 +26,7 @@
 ## Admin User.
 
 - Email: ahnaf@gmail.com
-- Password: 1234567
+- Password: **\*\*\***
 
 ## Why Choose Us(Rebuy Phone).
 
@@ -23,15 +36,6 @@
 - Dependable Product.
 - Reputable Company.
 - Exclusive Offers Of Any Product.
-
-## Project Description.
-
-- "Rebuy Phone" is a Phone Services Website.
-- 24/7 Our Service.
-- Our Services..
-- Good Product Sell minimum Price
-- All Product ar verify
-- Product will delivery within Two Days
 
 ## Technologies use and Installation.
 

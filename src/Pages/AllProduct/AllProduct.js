@@ -9,7 +9,7 @@ const AllProduct = () => {
   const { data: allProduct = [] } = useQuery({
     queryKey: ["AllProduct"],
     queryFn: () =>
-      fetch("https://rebuy-phone-server.vercel.app/AllProduct").then((res) =>
+      fetch(`${process.env.REACT_APP_API}/AllProduct`).then((res) =>
         res.json()
       ),
   });

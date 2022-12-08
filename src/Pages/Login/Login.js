@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import toast from "react-hot-toast";
+import toast, { Toaster } from "react-hot-toast";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthProvider/AuthProvider";
 import useTitle from "../../hooks/useTitle";
@@ -52,12 +52,31 @@ const Login = () => {
   const handleGoogleSignIn = () => {
     googleSignIn()
       .then((res) => {
-        toast.success("Login Successful");
         const user = res.user;
-        setLoginEmail(user.email);
-        navigate(from, { replace: true });
+        console.log(user);
+        const { displayName, email } = user;
+        saveUser(displayName, email);
       })
-      .catch((err) => console.error(err));
+      .catch((err) => {
+        setLoading(false);
+        console.error(err);
+      });
+  };
+
+  const saveUser = (name, email) => {
+    const user = { name, email };
+    fetch("https://rebuy-phone-server.vercel.app/users", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(user),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setLoginEmail(email);
+        toast.success("Login Successful");
+      });
   };
 
   return (
@@ -115,6 +134,7 @@ const Login = () => {
               <button className="btn btn-primary">Login</button>
             </div>
           </form>
+          <Toaster></Toaster>
         </div>
       </div>
     </div>

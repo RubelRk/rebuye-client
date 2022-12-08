@@ -5,7 +5,8 @@ import useTitle from "../../hooks/useTitle";
 
 const ProductBooking = ({ productBooked, setProductBooked }) => {
   useTitle("ProductBooking");
-  const { Product_Name, picture, resale_price, seller_name } = productBooked;
+  const { Product_Name, picture, resale_price, seller_name, _id } =
+    productBooked;
 
   const { user } = useContext(AuthContext);
 
@@ -31,6 +32,8 @@ const ProductBooking = ({ productBooked, setProductBooked }) => {
       location,
       phoneNumber,
       picture,
+      productId: _id,
+      //new add  productId: _id,
     };
 
     fetch("https://rebuy-phone-server.vercel.app/ProductBooking", {

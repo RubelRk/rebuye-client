@@ -4,14 +4,15 @@ import { AuthContext } from "../../../contexts/AuthProvider/AuthProvider";
 import useTitle from "../../../hooks/useTitle";
 import { useNavigate } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
-// import useAllSeller from "../../../hooks/useAllUser";
+import useAllSeller from "../../../hooks/useAllUser";
 
 const AddProduct = () => {
   useTitle("AddProduct");
   const { user } = useContext(AuthContext);
   const { email, displayName } = user;
-  // const [isVerify] = useAllSeller(email);
-  // console.log(isVerify);
+  // console.log("before add product ");
+  const [isVerify] = useAllSeller(email);
+  console.log("add product", isVerify);
 
   useTitle("Add Product");
   const navigate = useNavigate();
@@ -225,7 +226,7 @@ const AddProduct = () => {
               className="input input-bordered w-full max-w-xs"
             />
           </div>
-          {/* {isVerify && (
+          {isVerify ? (
             <div className="form-control w-full max-w-xs">
               <label className="label">
                 <span className="label-text">isVerified</span>
@@ -239,7 +240,9 @@ const AddProduct = () => {
                 className="input input-bordered w-full max-w-xs"
               />
             </div>
-          )} */}
+          ) : (
+            ""
+          )}
 
           <input
             value="Add Product"

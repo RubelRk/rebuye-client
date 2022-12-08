@@ -5,7 +5,7 @@ const useToken = (email) => {
   console.log(token);
   useEffect(() => {
     if (email) {
-      fetch(`https://rebuy-phone-server.vercel.app/jwt?email=${email}`)
+      fetch(`http://localhost:4000/jwt?email=${email}`)
         .then((res) => res.json())
         .then((data) => {
           if (data.token) {

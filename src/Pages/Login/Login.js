@@ -53,7 +53,6 @@ const Login = () => {
     googleSignIn()
       .then((res) => {
         const user = res.user;
-        console.log(user);
         const { displayName, email } = user;
         saveUser(displayName, email);
       })
